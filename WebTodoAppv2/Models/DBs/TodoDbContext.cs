@@ -15,9 +15,17 @@
 
         public DbSet<Todo> Todos { get; set; }
 
+        public DbSet<Operation> Operations { get; set; }
+
         public void AddTodo(Todo todo)
         {
             Todos.Add(todo);
+            SaveChanges();
+        }
+
+        public void AddOperation(Operation operation)
+        {
+            Operations.Add(operation);
             SaveChanges();
         }
 
