@@ -13,6 +13,12 @@
 
         public DbSet<Todo> Todos { get; set; }
 
+        public void AddTodo(Todo todo)
+        {
+            Todos.Add(todo);
+            SaveChanges();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder();

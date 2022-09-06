@@ -20,7 +20,18 @@
             <MenuItem Header="File" />
         </Menu>
 
-        <TextBox Grid.Row="1" Padding="2" />
+        <TextBox
+            Grid.Row="1"
+            Padding="2"
+            Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding AddTodoCommand}"
+                    Modifiers="Ctrl" />
+            </TextBox.InputBindings>
+        </TextBox>
 
         <ListView Grid.Row="2" />
 
