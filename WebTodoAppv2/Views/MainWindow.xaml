@@ -8,6 +8,14 @@
     Height="800"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="dictionaries/ListViewResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -33,7 +41,10 @@
             </TextBox.InputBindings>
         </TextBox>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Todos}" />
+        <ListView
+            Grid.Row="2"
+            ItemTemplate="{StaticResource ListViewDataTemplate}"
+            ItemsSource="{Binding Todos}" />
 
         <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters">
+
+    <DataTemplate x:Key="ListViewDataTemplate">
+
+        <DataTemplate.Resources>
+            <converters:DateTimeConverter x:Key="DateTimeConverter" />
+        </DataTemplate.Resources>
+
+    </DataTemplate>
+
+</ResourceDictionary>
