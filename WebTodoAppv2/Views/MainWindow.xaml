@@ -43,6 +43,7 @@
 
         <ListView
             Grid.Row="2"
+            HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
             ItemsSource="{Binding Todos}" />
 
