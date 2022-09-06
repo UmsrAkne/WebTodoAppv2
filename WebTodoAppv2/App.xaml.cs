@@ -22,7 +22,6 @@
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
             IUnityContainer container = new UnityContainer();
 
             // DI する対象が具象クラスである場合は RegisterType の必要はないかも？　(未検証)
@@ -41,6 +40,8 @@
             {
                 // SystemMessage = "PostgreSQL データベースへの接続に失敗しました";
             }
+
+            base.OnStartup(e);
         }
     }
 }
