@@ -1,6 +1,8 @@
 ﻿namespace WebTodoAppv2.Models.DBs
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.EntityFrameworkCore;
     using Npgsql;
 
@@ -17,6 +19,11 @@
         {
             Todos.Add(todo);
             SaveChanges();
+        }
+
+        public List<Todo> GetTodos()
+        {
+            return Todos.Where(t => true).OrderBy(t => t.Id).ToList();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

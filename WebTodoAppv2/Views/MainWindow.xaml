@@ -33,7 +33,7 @@
             </TextBox.InputBindings>
         </TextBox>
 
-        <ListView Grid.Row="2" />
+        <ListView Grid.Row="2" ItemsSource="{Binding Todos}" />
 
         <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />
