@@ -11,6 +11,8 @@
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
+        public DbSet<Todo> Todos { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder();
