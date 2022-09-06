@@ -1,6 +1,8 @@
 ﻿namespace WebTodoAppv2.Models.DBs
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.EntityFrameworkCore;
     using Npgsql;
 
@@ -9,6 +11,19 @@
         public TodoDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
+
+        public DbSet<Todo> Todos { get; set; }
+
+        public void AddTodo(Todo todo)
+        {
+            Todos.Add(todo);
+            SaveChanges();
+        }
+
+        public List<Todo> GetTodos()
+        {
+            return Todos.Where(t => true).OrderBy(t => t.Id).ToList();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

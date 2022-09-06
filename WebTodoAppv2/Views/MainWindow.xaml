@@ -20,9 +20,20 @@
             <MenuItem Header="File" />
         </Menu>
 
-        <TextBox Grid.Row="1" Padding="2" />
+        <TextBox
+            Grid.Row="1"
+            Padding="2"
+            Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}">
 
-        <ListView Grid.Row="2" />
+            <TextBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding AddTodoCommand}"
+                    Modifiers="Ctrl" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Todos}" />
 
         <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />
