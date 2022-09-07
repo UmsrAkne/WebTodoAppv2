@@ -56,9 +56,31 @@
                     Grid.Column="2"
                     Margin="8,0"
                     Command="{Binding DataContext.StartTodoCommand, ElementName=window}"
-                    CommandParameter="{Binding}"
-                    Content="▶"
-                    Style="{StaticResource RadiusButtonStyle}" />
+                    CommandParameter="{Binding}">
+
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="InitialState">
+                                    <Setter Property="Content" Value="▶" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Working">
+                                    <Setter Property="Content" Value="Wroking" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Pausing">
+                                    <Setter Property="Content" Value="▶" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="Content" Value="完了" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
 
                 <TextBlock Grid.Column="3" Text="{Binding CreationDateTime, Converter={StaticResource DateTimeConverter}}" />
 

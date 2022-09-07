@@ -47,6 +47,7 @@
         public DelegateCommand<Todo> StartTodoCommand => new DelegateCommand<Todo>((param) =>
         {
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Start, DateTime = DateTime.Now, TodoId = param.Id });
+            ReloadCommand.Execute();
         });
     }
 }

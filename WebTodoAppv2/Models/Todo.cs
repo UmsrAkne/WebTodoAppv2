@@ -3,9 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Prism.Mvvm;
 
-    public class Todo
+    public class Todo : BindableBase
     {
+        private WorkingState workingState;
+
         [Key]
         [Required]
         public int Id { get; set; }
@@ -17,6 +20,6 @@
         public DateTime CreationDateTime { get; set; }
 
         [NotMapped]
-        public WorkingState WorkingState { get; set; }
+        public WorkingState WorkingState { get => workingState; set => SetProperty(ref workingState, value); }
     }
 }
