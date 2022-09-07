@@ -11,7 +11,6 @@
     {
         private string title = "Web todo app v2";
         private string inputText;
-        private ObservableCollection<Todo> todos;
 
         private TodoDbContext todoDbContext;
 
@@ -33,8 +32,6 @@
 
         public TodoLists TodoLists { get; private set; }
 
-        public ObservableCollection<Todo> Todos { get => todos; set => SetProperty(ref todos, value); }
-
         public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
         {
             todoDbContext.AddTodo(new Todo { Title = InputText, CreationDateTime = DateTime.Now });
@@ -44,7 +41,7 @@
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
-            Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+            TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
         });
 
         public DelegateCommand<Todo> StartTodoCommand => new DelegateCommand<Todo>((param) =>
