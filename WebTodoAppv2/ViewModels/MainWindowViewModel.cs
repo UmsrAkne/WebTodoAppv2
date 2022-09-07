@@ -15,9 +15,10 @@
 
         private TodoDbContext todoDbContext;
 
-        public MainWindowViewModel(TodoDbContext dbContext)
+        public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists)
         {
             todoDbContext = dbContext;
+            TodoLists = todoLists;
 
             ReloadCommand.Execute();
         }
@@ -29,6 +30,8 @@
         }
 
         public string InputText { get => inputText; set => SetProperty(ref inputText, value); }
+
+        public TodoLists TodoLists { get; private set; }
 
         public ObservableCollection<Todo> Todos { get => todos; set => SetProperty(ref todos, value); }
 

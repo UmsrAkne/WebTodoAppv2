@@ -3,6 +3,7 @@
     using System.Windows;
     using Prism.Ioc;
     using Unity;
+    using WebTodoAppv2.Models;
     using WebTodoAppv2.Models.DBs;
     using WebTodoAppv2.Views;
 
@@ -26,9 +27,11 @@
 
             // DI する対象が具象クラスである場合は RegisterType の必要はないかも？　(未検証)
             container.RegisterType(typeof(TodoDbContext));
+            container.RegisterType(typeof(TodoLists));
 
             // 前述の RegisterType を削除しても Singleton に登録は可能。
             container.RegisterSingleton(typeof(TodoDbContext));
+            container.RegisterSingleton(typeof(TodoLists));
 
             var dbContext = container.Resolve<TodoDbContext>();
 
