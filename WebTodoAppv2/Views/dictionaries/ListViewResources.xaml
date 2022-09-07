@@ -56,7 +56,7 @@
                     Grid.Column="2"
                     Margin="8,0"
                     Command="{Binding DataContext.StartTodoCommand, ElementName=window}"
-                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource AncestorType=ListViewItem}}"
+                    CommandParameter="{Binding}"
                     Content="▶"
                     Style="{StaticResource RadiusButtonStyle}" />
 
