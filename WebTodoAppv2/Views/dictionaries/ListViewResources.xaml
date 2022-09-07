@@ -48,8 +48,7 @@
                 <CheckBox
                     Grid.Column="0"
                     Margin="5,0"
-                    VerticalAlignment="Center"
-                    IsChecked="{Binding IsComplete}" />
+                    VerticalAlignment="Center" />
 
                 <TextBlock Grid.Column="1" Text="{Binding Title}" />
 

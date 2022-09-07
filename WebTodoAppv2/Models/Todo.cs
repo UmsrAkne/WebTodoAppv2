@@ -14,8 +14,5 @@
 
         [Required]
         public DateTime CreationDateTime { get; set; }
-
-        [Required]
-        public bool IsComplete { get; set; }
     }
 }
