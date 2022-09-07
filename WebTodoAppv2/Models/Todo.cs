@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Todo
     {
@@ -14,5 +15,8 @@
 
         [Required]
         public DateTime CreationDateTime { get; set; }
+
+        [NotMapped]
+        public WorkingState WorkingState { get; set; }
     }
 }
