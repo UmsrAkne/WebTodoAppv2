@@ -11,13 +11,13 @@
     {
         private string title = "Web todo app v2";
         private string inputText;
-        private ObservableCollection<Todo> todos;
 
         private TodoDbContext todoDbContext;
 
-        public MainWindowViewModel(TodoDbContext dbContext)
+        public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists)
         {
             todoDbContext = dbContext;
+            TodoLists = todoLists;
 
             ReloadCommand.Execute();
         }
@@ -30,7 +30,7 @@
 
         public string InputText { get => inputText; set => SetProperty(ref inputText, value); }
 
-        public ObservableCollection<Todo> Todos { get => todos; set => SetProperty(ref todos, value); }
+        public TodoLists TodoLists { get; private set; }
 
         public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
         {
@@ -41,12 +41,13 @@
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
-            Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+            TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
         });
 
         public DelegateCommand<Todo> StartTodoCommand => new DelegateCommand<Todo>((param) =>
         {
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Start, DateTime = DateTime.Now, TodoId = param.Id });
+            ReloadCommand.Execute();
         });
     }
 }

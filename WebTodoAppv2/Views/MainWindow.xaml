@@ -46,7 +46,7 @@
             Grid.Row="2"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding Todos}" />
+            ItemsSource="{Binding TodoLists.Todos}" />
 
         <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />
