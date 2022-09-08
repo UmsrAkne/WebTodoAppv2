@@ -65,6 +65,12 @@
             <StatusBarItem Content="status bar" />
         </StatusBar>
 
+        <ListView
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            ItemsSource="{Binding TodoLists.Operations}" />
+
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
     </Grid>
