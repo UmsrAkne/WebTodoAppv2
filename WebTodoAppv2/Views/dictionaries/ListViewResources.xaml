@@ -78,7 +78,7 @@
                 <Button
                     Grid.Column="2"
                     Margin="8,0"
-                    Command="{Binding DataContext.StartTodoCommand, ElementName=window}"
+                    Command="{Binding DataContext.ChangeTodoStateCommand, ElementName=window}"
                     CommandParameter="{Binding}">
 
                     <Button.Style>
