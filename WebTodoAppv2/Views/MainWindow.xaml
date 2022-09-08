@@ -2,6 +2,7 @@
     x:Class="WebTodoAppv2.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:prism="http://prismlibrary.com/"
     Name="window"
     Title="{Binding Title}"
@@ -52,11 +53,19 @@
         </TextBox>
 
         <ListView
+            Name="listView"
             Grid.Row="2"
             Grid.Column="0"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding TodoLists.Todos}" />
+            ItemsSource="{Binding TodoLists.Todos}">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ShowTodoDetailCommand}" CommandParameter="{Binding SelectedItem, ElementName=listView}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
 
         <StatusBar
             Grid.Row="3"

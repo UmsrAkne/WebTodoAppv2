@@ -72,6 +72,11 @@
             return todos;
         }
 
+        public List<Operation> GetOperations(Todo todo)
+        {
+            return Operations.Where(op => todo.Id == op.TodoId).OrderBy(op => op.DateTime).ToList();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder();

@@ -63,5 +63,13 @@
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
             ReloadCommand.Execute();
         });
+
+        public DelegateCommand<Todo> ShowTodoDetailCommand => new DelegateCommand<Todo>((todo) =>
+        {
+            if (todo != null)
+            {
+                TodoLists.Operations = new ObservableCollection<Operation>(todoDbContext.GetOperations(todo));
+            }
+        });
     }
 }
