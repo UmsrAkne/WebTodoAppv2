@@ -64,7 +64,17 @@
                     </CheckBox.Style>
                 </CheckBox>
 
-                <TextBlock Grid.Column="1" Text="{Binding Title}" />
+                <TextBlock Grid.Column="1" Text="{Binding Title}">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="Foreground" Value="DarkGray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
 
                 <Button
                     Grid.Column="2"
