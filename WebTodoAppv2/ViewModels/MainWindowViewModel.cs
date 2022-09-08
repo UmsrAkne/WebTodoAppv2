@@ -49,5 +49,11 @@
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Start, DateTime = DateTime.Now, TodoId = param.Id });
             ReloadCommand.Execute();
         });
+
+        public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
+        {
+            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
+            ReloadCommand.Execute();
+        });
     }
 }

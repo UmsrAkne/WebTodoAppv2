@@ -48,7 +48,21 @@
                 <CheckBox
                     Grid.Column="0"
                     Margin="5,0"
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
+                    CommandParameter="{Binding}">
+
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
 
                 <TextBlock Grid.Column="1" Text="{Binding Title}" />
 
