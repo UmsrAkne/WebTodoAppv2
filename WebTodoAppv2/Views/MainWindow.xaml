@@ -78,6 +78,7 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
+            ItemTemplate="{StaticResource DetailListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Operations}" />
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />

@@ -115,4 +115,23 @@
 
     </DataTemplate>
 
+    <DataTemplate x:Key="DetailListViewDataTemplate">
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding DateTime}" />
+
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="10,0"
+                    Text="{Binding Kind}" />
+
+            </Grid>
+        </Border>
+    </DataTemplate>
+
 </ResourceDictionary>
