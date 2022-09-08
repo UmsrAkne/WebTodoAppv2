@@ -25,12 +25,21 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <MenuItem Header="File" />
         </Menu>
 
         <TextBox
             Grid.Row="1"
+            Grid.Column="0"
             Padding="2"
             Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}">
 
@@ -44,11 +53,15 @@
 
         <ListView
             Grid.Row="2"
+            Grid.Column="0"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Todos}" />
 
-        <StatusBar Grid.Row="3">
+        <StatusBar
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <StatusBarItem Content="status bar" />
         </StatusBar>
 
