@@ -54,6 +54,5 @@
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
-
     </Grid>
 </Window>
