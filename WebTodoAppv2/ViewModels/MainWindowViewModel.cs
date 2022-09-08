@@ -44,9 +44,23 @@
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
         });
 
-        public DelegateCommand<Todo> StartTodoCommand => new DelegateCommand<Todo>((param) =>
+        public DelegateCommand<Todo> ChangeTodoStateCommand => new DelegateCommand<Todo>((param) =>
         {
-            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Start, DateTime = DateTime.Now, TodoId = param.Id });
+            OperationKind operationKind = param.WorkingState switch
+            {
+                WorkingState.InitialState => OperationKind.Start,
+                WorkingState.Working => OperationKind.Pause,
+                WorkingState.Pausing => OperationKind.Resume,
+                _ => throw new InvalidOperationException(),
+            };
+
+            todoDbContext.AddOperation(new Operation() { Kind = operationKind, DateTime = DateTime.Now, TodoId = param.Id });
+            ReloadCommand.Execute();
+        });
+
+        public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
+        {
+            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
             ReloadCommand.Execute();
         });
     }

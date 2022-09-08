@@ -37,7 +37,6 @@
 
         <Border>
             <Grid>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
@@ -48,21 +47,45 @@
                 <CheckBox
                     Grid.Column="0"
                     Margin="5,0"
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
+                    CommandParameter="{Binding}">
 
-                <TextBlock Grid.Column="1" Text="{Binding Title}" />
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+
+                <TextBlock Grid.Column="1" Text="{Binding Title}">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="Foreground" Value="DarkGray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
 
                 <Button
                     Grid.Column="2"
                     Margin="8,0"
-                    Command="{Binding DataContext.StartTodoCommand, ElementName=window}"
+                    Command="{Binding DataContext.ChangeTodoStateCommand, ElementName=window}"
                     CommandParameter="{Binding}">
 
                     <Button.Style>
                         <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding WorkingState}" Value="InitialState">
-                                    <Setter Property="Content" Value="▶" />
+                                    <Setter Property="Content" Value="Start" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Working">
@@ -70,11 +93,13 @@
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Pausing">
-                                    <Setter Property="Content" Value="▶" />
+                                    <Setter Property="Content" Value="Resume" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                    <Setter Property="Content" Value="完了" />
+                                    <Setter Property="Content" Value="Completed" />
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="Opacity" Value="0.5" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
