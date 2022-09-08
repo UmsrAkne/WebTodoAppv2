@@ -37,7 +37,6 @@
 
         <Border>
             <Grid>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
@@ -86,7 +85,7 @@
                         <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding WorkingState}" Value="InitialState">
-                                    <Setter Property="Content" Value="▶" />
+                                    <Setter Property="Content" Value="Start" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Working">
@@ -94,11 +93,11 @@
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Pausing">
-                                    <Setter Property="Content" Value="▶" />
+                                    <Setter Property="Content" Value="Resume" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                    <Setter Property="Content" Value="完了" />
+                                    <Setter Property="Content" Value="Completed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
