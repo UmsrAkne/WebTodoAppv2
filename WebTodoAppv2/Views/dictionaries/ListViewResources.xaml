@@ -128,7 +128,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Margin="10,0"
-                    Text="{Binding Kind}" />
+                    Text="{Binding Text}" />
 
             </Grid>
         </Border>

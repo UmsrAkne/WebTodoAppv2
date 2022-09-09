@@ -73,7 +73,7 @@
         {
             if (todo != null)
             {
-                TodoLists.Operations = new ObservableCollection<Operation>(todoDbContext.GetOperations(todo));
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(todo));
             }
         });
     }
