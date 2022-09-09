@@ -2,8 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Operation
+    public class Operation : ITimeTableItem
     {
         [Key]
         [Required]
@@ -17,5 +18,8 @@
 
         [Required]
         public int TodoId { get; set; }
+
+        [NotMapped]
+        public string Text { get => Kind.ToString(); set => _ = value; }
     }
 }
