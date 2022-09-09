@@ -58,7 +58,8 @@
             Grid.Column="0"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding TodoLists.Todos}">
+            ItemsSource="{Binding TodoLists.Todos}"
+            SelectedItem="{Binding TodoLists.SelectionItem}">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">

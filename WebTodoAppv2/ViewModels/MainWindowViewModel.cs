@@ -42,6 +42,11 @@
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+
+            if (TodoLists.SelectionItem != null)
+            {
+                ShowTodoDetailCommand.Execute(TodoLists.SelectionItem);
+            }
         });
 
         public DelegateCommand<Todo> ChangeTodoStateCommand => new DelegateCommand<Todo>((param) =>
