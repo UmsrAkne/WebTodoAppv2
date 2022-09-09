@@ -17,6 +17,8 @@
 
         public DbSet<Operation> Operations { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         public void AddTodo(Todo todo)
         {
             Todos.Add(todo);
