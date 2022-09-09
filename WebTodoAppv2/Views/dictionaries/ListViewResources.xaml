@@ -116,6 +116,11 @@
     </DataTemplate>
 
     <DataTemplate x:Key="DetailListViewDataTemplate">
+
+        <DataTemplate.Resources>
+            <converters:DateTimeConverter x:Key="DateTimeConverter" />
+        </DataTemplate.Resources>
+
         <Border>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -123,7 +128,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="{Binding DateTime}" />
+                <TextBlock Grid.Column="0" Text="{Binding DateTime, Converter={StaticResource DateTimeConverter}}" />
 
                 <TextBlock
                     Grid.Column="1"
