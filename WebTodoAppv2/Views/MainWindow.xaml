@@ -75,9 +75,21 @@
             <StatusBarItem Content="status bar" />
         </StatusBar>
 
-        <ListView
+        <TextBox
             Grid.Row="1"
-            Grid.RowSpan="2"
+            Grid.Column="1"
+            Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding AddCommentCommand}"
+                    Modifiers="Ctrl" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <ListView
+            Grid.Row="2"
             Grid.Column="1"
             ItemTemplate="{StaticResource DetailListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Operations}" />

@@ -31,6 +31,12 @@
             SaveChanges();
         }
 
+        public void AddComment(Comment comment)
+        {
+            Comments.Add(comment);
+            SaveChanges();
+        }
+
         public List<Todo> GetTodos()
         {
             var todos = Todos.Where(t => true).OrderBy(t => t.Id).ToList();
