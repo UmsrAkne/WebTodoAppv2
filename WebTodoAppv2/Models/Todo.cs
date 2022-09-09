@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using Prism.Mvvm;
 
-    public class Todo : BindableBase
+    public class Todo : BindableBase, ITimeTableItem
     {
         private WorkingState workingState;
 
@@ -21,5 +21,11 @@
 
         [NotMapped]
         public WorkingState WorkingState { get => workingState; set => SetProperty(ref workingState, value); }
+
+        [NotMapped]
+        public DateTime DateTime { get => CreationDateTime; set => CreationDateTime = value; }
+
+        [NotMapped]
+        public string Text { get => "Created"; set => _ = value; }
     }
 }

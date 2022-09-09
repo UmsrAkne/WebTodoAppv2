@@ -42,6 +42,11 @@
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+
+            if (TodoLists.SelectionItem != null)
+            {
+                ShowTodoDetailCommand.Execute(TodoLists.SelectionItem);
+            }
         });
 
         public DelegateCommand<Todo> ChangeTodoStateCommand => new DelegateCommand<Todo>((param) =>
@@ -62,6 +67,14 @@
         {
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
             ReloadCommand.Execute();
+        });
+
+        public DelegateCommand<Todo> ShowTodoDetailCommand => new DelegateCommand<Todo>((todo) =>
+        {
+            if (todo != null)
+            {
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(todo));
+            }
         });
     }
 }

@@ -17,6 +17,8 @@
 
         public DbSet<Operation> Operations { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         public void AddTodo(Todo todo)
         {
             Todos.Add(todo);
@@ -70,6 +72,21 @@
             }
 
             return todos;
+        }
+
+        /// <summary>
+        /// 入力された todo に対して行った操作一覧を詰めたリストを取得します。
+        /// </summary>
+        /// <param name="todo">操作ログを取得する Todo</param>
+        /// <returns>todo に対して行った操作一覧を詰めたリスト</returns>
+        public List<ITimeTableItem> GetOperations(Todo todo)
+        {
+            var comments = Comments.Where(c => todo.Id == c.TodoId).Cast<ITimeTableItem>();
+            var operations = Operations.Where(op => todo.Id == op.TodoId).Cast<ITimeTableItem>();
+            return new List<ITimeTableItem>() { todo }
+                .Concat(comments)
+                .Concat(operations)
+                .OrderBy(ti => ti.DateTime).ToList();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
