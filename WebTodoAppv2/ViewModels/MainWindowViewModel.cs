@@ -102,7 +102,10 @@
 
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
         {
-            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), result => { });
+            if (TodoLists.SelectionItem != null)
+            {
+                dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), result => { });
+            }
         });
     }
 }
