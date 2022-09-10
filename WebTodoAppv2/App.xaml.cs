@@ -2,6 +2,7 @@
 {
     using System.Windows;
     using Prism.Ioc;
+    using Prism.Unity;
     using Unity;
     using WebTodoAppv2.Models;
     using WebTodoAppv2.Models.DBs;
@@ -21,15 +22,11 @@
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<DetailPage, DetailPageViewModel>();
-        }
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            IUnityContainer container = new UnityContainer();
+            IUnityContainer container = containerRegistry.GetContainer();
 
             // DI する対象が具象クラスである場合は RegisterType の必要はないかも？　(未検証)
             container.RegisterType(typeof(TodoDbContext));
-            container.RegisterType(typeof(TodoLists));
 
             // 前述の RegisterType を削除しても Singleton に登録は可能。
             container.RegisterSingleton(typeof(TodoDbContext));
@@ -45,7 +42,10 @@
             {
                 // SystemMessage = "PostgreSQL データベースへの接続に失敗しました";
             }
+        }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
             base.OnStartup(e);
         }
     }
