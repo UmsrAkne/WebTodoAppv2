@@ -4,21 +4,25 @@
     using System.Collections.ObjectModel;
     using Prism.Commands;
     using Prism.Mvvm;
+    using Prism.Services.Dialogs;
     using WebTodoAppv2.Models;
     using WebTodoAppv2.Models.DBs;
+    using WebTodoAppv2.Views;
 
     public class MainWindowViewModel : BindableBase
     {
         private string title = "Web todo app v2";
+        private IDialogService dialogService;
         private string inputText;
         private string commentText;
 
         private TodoDbContext todoDbContext;
 
-        public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists)
+        public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists, IDialogService dialogService)
         {
             todoDbContext = dbContext;
             TodoLists = todoLists;
+            this.dialogService = dialogService;
 
             ReloadCommand.Execute();
         }
@@ -94,6 +98,11 @@
             {
                 TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(todo));
             }
+        });
+
+        public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
+        {
+            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), result => { });
         });
     }
 }

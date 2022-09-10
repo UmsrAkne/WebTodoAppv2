@@ -5,6 +5,7 @@
     using Unity;
     using WebTodoAppv2.Models;
     using WebTodoAppv2.Models.DBs;
+    using WebTodoAppv2.ViewModels;
     using WebTodoAppv2.Views;
 
     /// <summary>
@@ -19,6 +20,7 @@
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialog<DetailPage, DetailPageViewModel>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
