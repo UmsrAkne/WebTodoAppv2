@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters">
+    xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
     <Style x:Key="RadiusButtonStyle" TargetType="Button">
 
@@ -35,83 +36,92 @@
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
 
-        <Border>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
+        <ContentControl>
 
-                <CheckBox
-                    Grid.Column="0"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
-                    CommandParameter="{Binding}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=window}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                    <CheckBox.Style>
-                        <Style TargetType="CheckBox">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                    <Setter Property="IsChecked" Value="True" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </CheckBox.Style>
-                </CheckBox>
+                    <CheckBox
+                        Grid.Column="0"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
+                        CommandParameter="{Binding}">
 
-                <TextBlock Grid.Column="1" Text="{Binding Title}">
-                    <TextBlock.Style>
-                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                    <Setter Property="Foreground" Value="DarkGray" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                        <CheckBox.Style>
+                            <Style TargetType="CheckBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Setter Property="IsChecked" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
 
-                <Button
-                    Grid.Column="2"
-                    Margin="8,0"
-                    Command="{Binding DataContext.ChangeTodoStateCommand, ElementName=window}"
-                    CommandParameter="{Binding}">
+                    <TextBlock Grid.Column="1" Text="{Binding Title}">
+                        <TextBlock.Style>
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                        <Setter Property="Foreground" Value="DarkGray" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
 
-                    <Button.Style>
-                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding WorkingState}" Value="InitialState">
-                                    <Setter Property="Content" Value="Start" />
-                                </DataTrigger>
+                    <Button
+                        Grid.Column="2"
+                        Margin="8,0"
+                        Command="{Binding DataContext.ChangeTodoStateCommand, ElementName=window}"
+                        CommandParameter="{Binding}">
 
-                                <DataTrigger Binding="{Binding WorkingState}" Value="Working">
-                                    <Setter Property="Content" Value="Wroking" />
-                                </DataTrigger>
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="InitialState">
+                                        <Setter Property="Content" Value="Start" />
+                                    </DataTrigger>
 
-                                <DataTrigger Binding="{Binding WorkingState}" Value="Pausing">
-                                    <Setter Property="Content" Value="Resume" />
-                                </DataTrigger>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="Working">
+                                        <Setter Property="Content" Value="Wroking" />
+                                    </DataTrigger>
 
-                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                    <Setter Property="Content" Value="Completed" />
-                                    <Setter Property="IsEnabled" Value="False" />
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="Pausing">
+                                        <Setter Property="Content" Value="Resume" />
+                                    </DataTrigger>
 
-                </Button>
+                                    <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                        <Setter Property="Content" Value="Completed" />
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Setter Property="Opacity" Value="0.5" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
 
-                <TextBlock Grid.Column="3" Text="{Binding CreationDateTime, Converter={StaticResource DateTimeConverter}}" />
+                    </Button>
 
-            </Grid>
+                    <TextBlock Grid.Column="3" Text="{Binding CreationDateTime, Converter={StaticResource DateTimeConverter}}" />
 
-        </Border>
+                </Grid>
+
+            </Border>
+
+        </ContentControl>
 
     </DataTemplate>
 
