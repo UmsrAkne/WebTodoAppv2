@@ -37,12 +37,34 @@
                 <Button
                     Grid.Column="0"
                     Command="{Binding CompleteTodoCommand}"
-                    Content="Complete" />
+                    Content="Complete">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
                 <Button
                     Grid.Column="1"
                     Command="{Binding ChangeTodoStateCommand}"
-                    Content="{Binding Todo.WorkingState}" />
+                    Content="{Binding Todo.WorkingState}">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
             </Grid>
 

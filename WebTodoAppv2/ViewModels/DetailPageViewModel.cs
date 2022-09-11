@@ -62,6 +62,7 @@
             }
 
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = Todo.Id });
+            Todo.WorkingState = WorkingState.Completed;
             Reload();
         });
 
