@@ -15,6 +15,7 @@
         {
             this.todoDbContext = todoDbContext;
             TodoLists = todoLists;
+            Todo = TodoLists.SelectionItem;
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -23,16 +24,16 @@
 
         public TodoLists TodoLists { get; set; }
 
+        public Todo Todo { get; set; }
+
         public DelegateCommand ChangeTodoStateCommand => new DelegateCommand(() =>
         {
-            if (TodoLists.SelectionItem == null)
+            if (Todo == null)
             {
                 return;
             }
 
-            var todo = TodoLists.SelectionItem;
-
-            OperationKind operationKind = todo.WorkingState switch
+            OperationKind operationKind = Todo.WorkingState switch
             {
                 WorkingState.InitialState => OperationKind.Start,
                 WorkingState.Working => OperationKind.Pause,
@@ -40,9 +41,9 @@
                 _ => throw new InvalidOperationException(),
             };
 
-            todoDbContext.AddOperation(new Operation() { Kind = operationKind, DateTime = DateTime.Now, TodoId = todo.Id });
+            todoDbContext.AddOperation(new Operation() { Kind = operationKind, DateTime = DateTime.Now, TodoId = Todo.Id });
 
-            todo.WorkingState = todo.WorkingState switch
+            Todo.WorkingState = Todo.WorkingState switch
             {
                 WorkingState.InitialState => WorkingState.Working,
                 WorkingState.Working => WorkingState.Pausing,
@@ -55,20 +56,20 @@
 
         public DelegateCommand CompleteTodoCommand => new DelegateCommand(() =>
         {
-            if (TodoLists.SelectionItem == null)
+            if (Todo == null)
             {
                 return;
             }
 
-            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = TodoLists.SelectionItem.Id });
+            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = Todo.Id });
             Reload();
         });
 
         public void Reload()
         {
-            if (TodoLists.SelectionItem != null)
+            if (Todo != null)
             {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(TodoLists.SelectionItem));
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
             }
         }
 
@@ -82,7 +83,7 @@
         {
             if (TodoLists.SelectionItem != null)
             {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(TodoLists.SelectionItem));
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
             }
         }
     }
