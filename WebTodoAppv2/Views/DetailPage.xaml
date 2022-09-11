@@ -40,30 +40,49 @@
                     Content="Complete">
 
                     <Button.Style>
-                        <Style TargetType="Button">
+                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
                             <Style.Triggers>
+
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="Content" Value="Completed" />
                                     <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="Opacity" Value="0.5" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
+
                 </Button>
 
                 <Button
                     Grid.Column="1"
-                    Command="{Binding ChangeTodoStateCommand}"
-                    Content="{Binding Todo.WorkingState}">
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding ChangeTodoStateCommand}">
 
                     <Button.Style>
-                        <Style TargetType="Button">
+                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
                             <Style.Triggers>
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="InitialState">
+                                    <Setter Property="Content" Value="Start" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Working">
+                                    <Setter Property="Content" Value="Wroking" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Pausing">
+                                    <Setter Property="Content" Value="Resume" />
+                                </DataTrigger>
+
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="Content" Value="Completed" />
                                     <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="Opacity" Value="0.5" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
+
                 </Button>
 
             </Grid>
