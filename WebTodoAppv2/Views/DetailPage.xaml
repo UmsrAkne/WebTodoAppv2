@@ -28,6 +28,24 @@
         <StackPanel Margin="5,5">
             <TextBlock Text="{Binding TodoLists.SelectionItem.Title}" />
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Column="0"
+                    Command="{Binding CompleteTodoCommand}"
+                    Content="Complete" />
+
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding ChangeTodoStateCommand}"
+                    Content="{Binding TodoLists.SelectionItem.WorkingState}" />
+
+            </Grid>
+
         </StackPanel>
 
         <ListView
