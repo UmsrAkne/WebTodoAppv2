@@ -3,13 +3,15 @@
     using System;
     using System.Collections.ObjectModel;
     using Prism.Commands;
+    using Prism.Mvvm;
     using Prism.Services.Dialogs;
     using WebTodoAppv2.Models;
     using WebTodoAppv2.Models.DBs;
 
-    public class DetailPageViewModel : IDialogAware
+    public class DetailPageViewModel : BindableBase, IDialogAware
     {
         private TodoDbContext todoDbContext;
+        private string commentText;
 
         public DetailPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
@@ -25,6 +27,8 @@
         public TodoLists TodoLists { get; set; }
 
         public Todo Todo { get; set; }
+
+        public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
 
         public DelegateCommand ChangeTodoStateCommand => new DelegateCommand(() =>
         {
@@ -64,6 +68,22 @@
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = Todo.Id });
             Todo.WorkingState = WorkingState.Completed;
             Reload();
+        });
+
+        public DelegateCommand AddCommentCommand => new DelegateCommand(() =>
+        {
+            if (Todo != null)
+            {
+                todoDbContext.AddComment(new Comment()
+                {
+                    Text = CommentText,
+                    TodoId = TodoLists.SelectionItem.Id,
+                    DateTime = DateTime.Now,
+                });
+
+                Reload();
+                CommentText = string.Empty;
+            }
         });
 
         public void Reload()
