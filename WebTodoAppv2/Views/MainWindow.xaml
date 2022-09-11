@@ -49,14 +49,7 @@
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Todos}"
-            SelectedItem="{Binding TodoLists.SelectionItem}">
-
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding ShowTodoDetailCommand}" CommandParameter="{Binding SelectedItem, ElementName=listView}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ListView>
+            SelectedItem="{Binding TodoLists.SelectionItem}" />
 
         <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />
