@@ -15,16 +15,20 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="dictionaries/ListViewResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="2.5*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding TodoLists.SelectionItem.Title}" />
+        <StackPanel Margin="5,5">
+            <TextBlock Text="{Binding TodoLists.SelectionItem.Title}" />
+
+        </StackPanel>
 
         <ListView
             Grid.Row="1"
