@@ -26,21 +26,12 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <Menu
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2">
+        <Menu Grid.Row="0">
             <MenuItem Header="File" />
         </Menu>
 
         <TextBox
             Grid.Row="1"
-            Grid.Column="0"
             Padding="2"
             Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}">
 
@@ -55,7 +46,6 @@
         <ListView
             Name="listView"
             Grid.Row="2"
-            Grid.Column="0"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Todos}"
@@ -68,31 +58,9 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <StatusBar
-            Grid.Row="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="2">
+        <StatusBar Grid.Row="3">
             <StatusBarItem Content="status bar" />
         </StatusBar>
-
-        <TextBox
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
-
-            <TextBox.InputBindings>
-                <KeyBinding
-                    Key="Return"
-                    Command="{Binding AddCommentCommand}"
-                    Modifiers="Ctrl" />
-            </TextBox.InputBindings>
-        </TextBox>
-
-        <ListView
-            Grid.Row="2"
-            Grid.Column="1"
-            ItemTemplate="{StaticResource DetailListViewDataTemplate}"
-            ItemsSource="{Binding TodoLists.Operations}" />
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
