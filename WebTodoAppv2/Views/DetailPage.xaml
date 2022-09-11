@@ -22,6 +22,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="2.5*" />
         </Grid.RowDefinitions>
 
@@ -89,8 +90,18 @@
 
         </StackPanel>
 
+        <TextBox Grid.Row="1" Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding AddCommentCommand}"
+                    Modifiers="Ctrl" />
+            </TextBox.InputBindings>
+        </TextBox>
+
         <ListView
-            Grid.Row="1"
+            Grid.Row="2"
             ItemTemplate="{StaticResource DetailListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Operations}" />
 

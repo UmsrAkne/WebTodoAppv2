@@ -46,22 +46,6 @@
             ReloadCommand.Execute();
         });
 
-        public DelegateCommand AddCommentCommand => new DelegateCommand(() =>
-        {
-            if (TodoLists.SelectionItem != null)
-            {
-                todoDbContext.AddComment(new Comment()
-                {
-                    Text = CommentText,
-                    TodoId = TodoLists.SelectionItem.Id,
-                    DateTime = DateTime.Now,
-                });
-
-                ReloadCommand.Execute();
-                CommentText = string.Empty;
-            }
-        });
-
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
