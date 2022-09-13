@@ -19,6 +19,9 @@
         [Required]
         public DateTime CreationDateTime { get; set; }
 
+        [Required]
+        public DateTime LimitDateTime { get; set; }
+
         [NotMapped]
         public WorkingState WorkingState { get => workingState; set => SetProperty(ref workingState, value); }
 
