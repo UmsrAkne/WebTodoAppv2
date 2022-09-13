@@ -29,6 +29,44 @@
         <StackPanel Margin="5,5">
             <TextBlock Text="{Binding Todo.Title}" />
 
+            <StackPanel Margin="0,4" Orientation="Horizontal">
+                <TextBlock Grid.Column="0" Text="作業状態 : " />
+                <TextBlock Grid.Column="1">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                            <Style.Triggers>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="InitialState">
+                                    <Setter Property="Text" Value="未着手" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Working">
+                                    <Setter Property="Text" Value="作業中" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Pausing">
+                                    <Setter Property="Text" Value="中断" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="Text" Value="完了" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <Border
+                    Width="1"
+                    Margin="10,0"
+                    Background="Gray" />
+
+                <TextBlock Grid.Column="0" Text="締め切り : " />
+                <TextBlock Grid.Column="1" Text="{Binding Todo.LimitDateTime}" />
+
+            </StackPanel>
+
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -68,7 +106,7 @@
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Working">
-                                    <Setter Property="Content" Value="Wroking" />
+                                    <Setter Property="Content" Value="Pause" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Pausing">
