@@ -106,7 +106,7 @@
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Working">
-                                    <Setter Property="Content" Value="Wroking" />
+                                    <Setter Property="Content" Value="Pause" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Pausing">
