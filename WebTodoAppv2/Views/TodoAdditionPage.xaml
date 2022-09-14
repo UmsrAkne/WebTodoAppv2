@@ -9,7 +9,18 @@
     Width="600"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <Page.InputBindings>
+
+        <KeyBinding
+            Key="Enter"
+            Command="{Binding AddTodoCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}" />
+
+    </Page.InputBindings>
+
+    <StackPanel FocusManager.FocusedElement="{Binding ElementName=titleTextBox}">
 
         <Grid Margin="4,5">
             <Grid.ColumnDefinitions>
@@ -18,14 +29,17 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="タイトル" />
-            <TextBox Grid.Column="1" />
+            <TextBox
+                x:Name="titleTextBox"
+                Grid.Column="1"
+                Text="{Binding TodoTitle}" />
 
         </Grid>
 
         <StackPanel Margin="4,5" Orientation="Horizontal">
             <TextBlock Width="70" Text="締め切り : " />
 
-            <TextBox Width="50" Text="24" />
+            <TextBox Width="50" Text="{Binding RemainingHour}" />
 
             <TextBlock Margin="5,0" Text="時間後" />
         </StackPanel>
@@ -34,15 +48,24 @@
             <CheckBox
                 Margin="5,0"
                 VerticalAlignment="Center"
-                IsChecked="False" />
+                IsChecked="{Binding CreateAsCompletedTodo}" />
+
             <TextBlock Text="完了済みで作成する" />
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-            <Button Margin="5" Content="作成" />
+            <Button
+                Margin="5"
+                Padding="3"
+                Command="{Binding AddTodoCommand}"
+                Content="作成 (Ctrl + Enter)" />
 
-            <Button Margin="5" Content="キャンセル" />
+            <Button
+                Margin="5"
+                Padding="3"
+                Command="{Binding CancelCommand}"
+                Content="キャンセル (Esc)" />
 
         </StackPanel>
     </StackPanel>
