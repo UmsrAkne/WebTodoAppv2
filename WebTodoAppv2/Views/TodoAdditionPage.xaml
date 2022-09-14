@@ -18,14 +18,14 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="タイトル" />
-            <TextBox Grid.Column="1" />
+            <TextBox Grid.Column="1" Text="{Binding TodoTitle}" />
 
         </Grid>
 
         <StackPanel Margin="4,5" Orientation="Horizontal">
             <TextBlock Width="70" Text="締め切り : " />
 
-            <TextBox Width="50" Text="24" />
+            <TextBox Width="50" Text="{Binding RemainingHour}" />
 
             <TextBlock Margin="5,0" Text="時間後" />
         </StackPanel>
@@ -40,7 +40,10 @@
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-            <Button Margin="5" Content="作成" />
+            <Button
+                Margin="5"
+                Command="{Binding AddTodoCommand}"
+                Content="作成" />
 
             <Button Margin="5" Content="キャンセル" />
 

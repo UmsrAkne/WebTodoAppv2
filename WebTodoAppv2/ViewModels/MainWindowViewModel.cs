@@ -68,6 +68,7 @@
         public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
         {
             dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), result => { });
+            ReloadCommand.Execute();
         });
     }
 }
