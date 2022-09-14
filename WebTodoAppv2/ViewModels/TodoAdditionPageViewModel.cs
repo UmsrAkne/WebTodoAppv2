@@ -10,7 +10,6 @@
     public class TodoAdditionPageViewModel : BindableBase, IDialogAware
     {
         private TodoDbContext todoDbContext;
-        private TodoLists todoLists;
 
         private string todoTitle;
 
@@ -19,10 +18,9 @@
 
         private bool createAsCompletedTodo;
 
-        public TodoAdditionPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
+        public TodoAdditionPageViewModel(TodoDbContext todoDbContext)
         {
             this.todoDbContext = todoDbContext;
-            this.todoLists = todoLists;
         }
 
         public event Action<IDialogResult> RequestClose;
