@@ -64,5 +64,10 @@
                 dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), result => { });
             }
         });
+
+        public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
+        {
+            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), result => { });
+        });
     }
 }

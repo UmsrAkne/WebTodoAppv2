@@ -18,6 +18,14 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding
+            Key="N"
+            Command="{Binding ShowTodoAdditionPageCommand}"
+            Modifiers="Ctrl" />
+
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
