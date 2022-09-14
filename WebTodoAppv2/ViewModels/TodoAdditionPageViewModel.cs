@@ -61,7 +61,12 @@
                 todoDbContext.AddOperation(op);
             }
 
-            RequestClose.Invoke(new DialogResult());
+            RequestClose.Invoke(default(DialogResult));
+        });
+
+        public DelegateCommand CancelCommand => new DelegateCommand(() =>
+        {
+            RequestClose.Invoke(default(DialogResult));
         });
 
         public bool CanCloseDialog() => true;

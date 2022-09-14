@@ -9,7 +9,18 @@
     Width="600"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <Page.InputBindings>
+
+        <KeyBinding
+            Key="Enter"
+            Command="{Binding AddTodoCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}" />
+
+    </Page.InputBindings>
+
+    <StackPanel FocusManager.FocusedElement="{Binding ElementName=titleTextBox}">
 
         <Grid Margin="4,5">
             <Grid.ColumnDefinitions>
@@ -18,7 +29,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="タイトル" />
-            <TextBox Grid.Column="1" Text="{Binding TodoTitle}" />
+            <TextBox
+                x:Name="titleTextBox"
+                Grid.Column="1"
+                Text="{Binding TodoTitle}" />
 
         </Grid>
 
@@ -44,9 +58,9 @@
             <Button
                 Margin="5"
                 Command="{Binding AddTodoCommand}"
-                Content="作成" />
+                Content="作成 (Ctrl + Enter)" />
 
-            <Button Margin="5" Content="キャンセル" />
+            <Button Margin="5" Content="キャンセル (Esc)" />
 
         </StackPanel>
     </StackPanel>
