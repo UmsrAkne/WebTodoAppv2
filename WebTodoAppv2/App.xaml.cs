@@ -22,6 +22,7 @@
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<DetailPage, DetailPageViewModel>();
+            containerRegistry.RegisterDialog<TodoAdditionPage, TodoAdditionPageViewModel>();
 
             IUnityContainer container = containerRegistry.GetContainer();
 
