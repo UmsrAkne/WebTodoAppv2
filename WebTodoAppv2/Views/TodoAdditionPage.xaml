@@ -57,10 +57,15 @@
 
             <Button
                 Margin="5"
+                Padding="3"
                 Command="{Binding AddTodoCommand}"
                 Content="作成 (Ctrl + Enter)" />
 
-            <Button Margin="5" Content="キャンセル (Esc)" />
+            <Button
+                Margin="5"
+                Padding="3"
+                Command="{Binding CancelCommand}"
+                Content="キャンセル (Esc)" />
 
         </StackPanel>
     </StackPanel>
