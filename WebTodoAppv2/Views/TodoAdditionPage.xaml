@@ -34,7 +34,8 @@
             <CheckBox
                 Margin="5,0"
                 VerticalAlignment="Center"
-                IsChecked="False" />
+                IsChecked="{Binding CreateAsCompletedTodo}" />
+
             <TextBlock Text="完了済みで作成する" />
         </StackPanel>
 

@@ -17,6 +17,8 @@
         // デフォルトは ２４時間後を期限とする
         private string remainingHour = TimeSpan.FromDays(1).TotalHours.ToString();
 
+        private bool createAsCompletedTodo;
+
         public TodoAdditionPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
             this.todoDbContext = todoDbContext;
@@ -31,6 +33,8 @@
 
         public string RemainingHour { get => remainingHour; set => SetProperty(ref remainingHour, value); }
 
+        public bool CreateAsCompletedTodo { get => createAsCompletedTodo; set => SetProperty(ref createAsCompletedTodo, value); }
+
         public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
         {
             var todo = new Todo { Title = TodoTitle, CreationDateTime = DateTime.Now };
@@ -44,7 +48,21 @@
                 todo.LimitDateTime = DateTime.Now.AddDays(1);
             }
 
+            // AddTodo で追加した時点で todo に ID が割り振らている
             todoDbContext.AddTodo(todo);
+
+            if (CreateAsCompletedTodo)
+            {
+                var op = new Operation()
+                {
+                    TodoId = todo.Id,
+                    DateTime = DateTime.Now,
+                    Kind = OperationKind.Complete,
+                };
+
+                todoDbContext.AddOperation(op);
+            }
+
             RequestClose.Invoke(new DialogResult());
         });
 
