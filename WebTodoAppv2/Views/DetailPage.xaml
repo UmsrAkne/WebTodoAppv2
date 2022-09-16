@@ -139,7 +139,10 @@
                 Margin="5,0"
                 Text="Comment : " />
 
-            <TextBox Grid.Column="1" Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox
+                Grid.Column="1"
+                Margin="5,0"
+                Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
 
                 <TextBox.InputBindings>
                     <KeyBinding
@@ -153,6 +156,7 @@
 
         <ListView
             Grid.Row="2"
+            Margin="0,5,0,0"
             ItemTemplate="{StaticResource DetailListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Operations}" />
 
