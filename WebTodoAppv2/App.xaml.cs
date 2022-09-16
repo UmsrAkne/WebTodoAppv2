@@ -43,6 +43,8 @@
             {
                 // SystemMessage = "PostgreSQL データベースへの接続に失敗しました";
             }
+
+            dbContext.AddDefaultGroup();
         }
 
         protected override void OnStartup(StartupEventArgs e)

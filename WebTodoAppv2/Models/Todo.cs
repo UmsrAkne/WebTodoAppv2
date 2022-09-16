@@ -22,6 +22,9 @@
         [Required]
         public DateTime LimitDateTime { get; set; }
 
+        [Required]
+        public int GroupId { get; set; }
+
         [NotMapped]
         public WorkingState WorkingState { get => workingState; set => SetProperty(ref workingState, value); }
 

@@ -10,17 +10,18 @@
     public class TodoAdditionPageViewModel : BindableBase, IDialogAware
     {
         private TodoDbContext todoDbContext;
-
         private string todoTitle;
+        private Group currentGroup;
 
         // デフォルトは ２４時間後を期限とする
         private string remainingHour = TimeSpan.FromDays(1).TotalHours.ToString();
 
         private bool createAsCompletedTodo;
 
-        public TodoAdditionPageViewModel(TodoDbContext todoDbContext)
+        public TodoAdditionPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
             this.todoDbContext = todoDbContext;
+            currentGroup = todoLists.CurrentGroup;
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -35,7 +36,7 @@
 
         public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
         {
-            var todo = new Todo { Title = TodoTitle, CreationDateTime = DateTime.Now };
+            var todo = new Todo { Title = TodoTitle, CreationDateTime = DateTime.Now, GroupId = currentGroup.Id };
 
             if (int.TryParse(RemainingHour, out var remainingTime))
             {
