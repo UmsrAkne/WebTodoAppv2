@@ -13,7 +13,6 @@
     {
         private string title = "Web todo app v2";
         private IDialogService dialogService;
-        private string commentText;
 
         private TodoDbContext todoDbContext;
 
@@ -31,8 +30,6 @@
             get { return title; }
             set { SetProperty(ref title, value); }
         }
-
-        public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
 
         public TodoLists TodoLists { get; private set; }
 
