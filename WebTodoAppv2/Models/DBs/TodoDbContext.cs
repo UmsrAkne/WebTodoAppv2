@@ -110,6 +110,11 @@
                 .OrderBy(ti => ti.DateTime).ToList();
         }
 
+        public List<Group> GetGroups()
+        {
+            return Groups.Where(g => true).ToList();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder();

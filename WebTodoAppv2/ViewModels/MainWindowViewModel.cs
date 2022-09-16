@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Services.Dialogs;
@@ -20,6 +21,7 @@
         {
             todoDbContext = dbContext;
             TodoLists = todoLists;
+            TodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
             this.dialogService = dialogService;
 
             ReloadCommand.Execute();
