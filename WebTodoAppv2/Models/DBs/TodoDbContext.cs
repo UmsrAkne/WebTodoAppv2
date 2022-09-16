@@ -19,6 +19,8 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+
         public void AddTodo(Todo todo)
         {
             Todos.Add(todo);
@@ -35,6 +37,19 @@
         {
             Comments.Add(comment);
             SaveChanges();
+        }
+
+        /// <summary>
+        /// グループのテーブルにレコードがなかった場合のみ、デフォルトのグループを追加します
+        /// アプリ起動時、 App クラスで DIコンテナに型を登録するタイミングで呼び出されます。
+        /// </summary>
+        public void AddDefaultGroup()
+        {
+            if (Groups.Count() == 0)
+            {
+                Groups.Add(new Group() { Name = "Default Group" });
+                SaveChanges();
+            }
         }
 
         public List<Todo> GetTodos()
