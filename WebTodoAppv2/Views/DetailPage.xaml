@@ -128,15 +128,28 @@
 
         </StackPanel>
 
-        <TextBox Grid.Row="1" Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <TextBox.InputBindings>
-                <KeyBinding
-                    Key="Return"
-                    Command="{Binding AddCommentCommand}"
-                    Modifiers="Ctrl" />
-            </TextBox.InputBindings>
-        </TextBox>
+            <TextBlock
+                Grid.Column="0"
+                Margin="5,0"
+                Text="Comment : " />
+
+            <TextBox Grid.Column="1" Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+
+                <TextBox.InputBindings>
+                    <KeyBinding
+                        Key="Return"
+                        Command="{Binding AddCommentCommand}"
+                        Modifiers="Ctrl" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+        </Grid>
 
         <ListView
             Grid.Row="2"
