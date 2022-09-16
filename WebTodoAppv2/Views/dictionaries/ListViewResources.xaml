@@ -16,7 +16,7 @@
                         BorderThickness="1"
                         CornerRadius="2">
 
-                        <TextBlock Text="{TemplateBinding Content}" />
+                        <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Content}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
