@@ -75,26 +75,6 @@
 
                 <Button
                     Grid.Column="0"
-                    Command="{Binding CompleteTodoCommand}"
-                    Content="Complete">
-
-                    <Button.Style>
-                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
-                            <Style.Triggers>
-
-                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
-                                    <Setter Property="Content" Value="Completed" />
-                                    <Setter Property="IsEnabled" Value="False" />
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-
-                </Button>
-
-                <Button
-                    Grid.Column="1"
                     HorizontalContentAlignment="Center"
                     Command="{Binding ChangeTodoStateCommand}">
 
@@ -124,22 +104,59 @@
 
                 </Button>
 
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding CompleteTodoCommand}"
+                    Content="Complete">
+
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
+                            <Style.Triggers>
+
+                                <DataTrigger Binding="{Binding Todo.WorkingState}" Value="Completed">
+                                    <Setter Property="Content" Value="Completed" />
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+
             </Grid>
 
         </StackPanel>
 
-        <TextBox Grid.Row="1" Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <TextBox.InputBindings>
-                <KeyBinding
-                    Key="Return"
-                    Command="{Binding AddCommentCommand}"
-                    Modifiers="Ctrl" />
-            </TextBox.InputBindings>
-        </TextBox>
+            <TextBlock
+                Grid.Column="0"
+                Margin="5,0"
+                Text="Comment : " />
+
+            <TextBox
+                Grid.Column="1"
+                Margin="5,0"
+                Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
+
+                <TextBox.InputBindings>
+                    <KeyBinding
+                        Key="Return"
+                        Command="{Binding AddCommentCommand}"
+                        Modifiers="Ctrl" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+        </Grid>
 
         <ListView
             Grid.Row="2"
+            Margin="0,5,0,0"
             ItemTemplate="{StaticResource DetailListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Operations}" />
 
