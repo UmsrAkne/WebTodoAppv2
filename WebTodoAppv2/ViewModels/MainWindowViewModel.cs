@@ -13,8 +13,6 @@
     {
         private string title = "Web todo app v2";
         private IDialogService dialogService;
-        private string inputText;
-        private string commentText;
 
         private TodoDbContext todoDbContext;
 
@@ -33,18 +31,7 @@
             set { SetProperty(ref title, value); }
         }
 
-        public string InputText { get => inputText; set => SetProperty(ref inputText, value); }
-
-        public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
-
         public TodoLists TodoLists { get; private set; }
-
-        public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
-        {
-            todoDbContext.AddTodo(new Todo { Title = InputText, CreationDateTime = DateTime.Now });
-            InputText = string.Empty;
-            ReloadCommand.Execute();
-        });
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
