@@ -95,6 +95,11 @@
             return todos;
         }
 
+        public List<Todo> GetTodos(Group group)
+        {
+            return GetTodos().Where(t => group.Id == t.GroupId).ToList();
+        }
+
         /// <summary>
         /// 入力された todo に対して行った操作一覧を詰めたリストを取得します。
         /// </summary>
