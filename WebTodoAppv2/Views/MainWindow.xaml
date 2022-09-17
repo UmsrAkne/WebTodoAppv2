@@ -42,6 +42,9 @@
             Grid.Column="0"
             Grid.ColumnSpan="2">
             <MenuItem Header="File" />
+            <MenuItem Header="Group">
+                <MenuItem Command="{Binding AddGroupCommand}" Header="グループを追加" />
+            </MenuItem>
         </Menu>
 
         <ListView

@@ -47,6 +47,15 @@
             ReloadCommand.Execute();
         });
 
+        public DelegateCommand AddGroupCommand => new DelegateCommand(() =>
+        {
+            todoDbContext.AddGroup(new Group() { Name = "New Group" });
+            var currentGroup = TodoLists.CurrentGroup;
+            ReloadCommand.Execute();
+
+            TodoLists.CurrentGroup = currentGroup;
+        });
+
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
         {
             if (TodoLists.SelectionItem != null)
