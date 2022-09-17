@@ -63,7 +63,13 @@
                 Grid.Row="0"
                 Margin="3"
                 Text="Groups" />
-            <ListView Grid.Row="1" />
+
+            <ListView
+                Grid.Row="1"
+                ItemTemplate="{StaticResource GroupListViewDataTemplate}"
+                ItemsSource="{Binding TodoLists.Groups}"
+                SelectedItem="{Binding TodoLists.CurrentGroup}" />
+
         </Grid>
 
 

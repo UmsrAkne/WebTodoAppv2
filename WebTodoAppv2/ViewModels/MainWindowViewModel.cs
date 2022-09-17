@@ -38,6 +38,7 @@
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+            TodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
         });
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
