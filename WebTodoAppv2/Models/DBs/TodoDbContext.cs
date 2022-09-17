@@ -52,6 +52,12 @@
             }
         }
 
+        public void AddGroup(Group group)
+        {
+            Groups.Add(group);
+            SaveChanges();
+        }
+
         public List<Todo> GetTodos()
         {
             var todos = Todos.Where(t => true).OrderBy(t => t.Id).ToList();
@@ -93,6 +99,11 @@
             }
 
             return todos;
+        }
+
+        public List<Todo> GetTodos(Group group)
+        {
+            return GetTodos().Where(t => group.Id == t.GroupId).ToList();
         }
 
         /// <summary>

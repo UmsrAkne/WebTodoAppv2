@@ -116,4 +116,10 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate x:Key="GroupListViewDataTemplate">
+        <Border>
+            <TextBlock Margin="5,0" Text="{Binding Name}" />
+        </Border>
+    </DataTemplate>
+
 </ResourceDictionary>

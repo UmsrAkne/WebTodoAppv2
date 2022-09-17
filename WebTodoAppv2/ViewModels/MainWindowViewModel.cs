@@ -37,13 +37,23 @@
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
-            TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos());
+            TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TodoLists.CurrentGroup));
+            TodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
         });
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {
             todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
             ReloadCommand.Execute();
+        });
+
+        public DelegateCommand AddGroupCommand => new DelegateCommand(() =>
+        {
+            todoDbContext.AddGroup(new Group() { Name = "New Group" });
+            var currentGroup = TodoLists.CurrentGroup;
+            ReloadCommand.Execute();
+
+            TodoLists.CurrentGroup = currentGroup;
         });
 
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>

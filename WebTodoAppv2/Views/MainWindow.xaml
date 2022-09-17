@@ -2,6 +2,7 @@
     x:Class="WebTodoAppv2.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:prism="http://prismlibrary.com/"
     Name="window"
     Title="{Binding Title}"
@@ -26,25 +27,65 @@
     </Window.InputBindings>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <MenuItem Header="File" />
+            <MenuItem Header="Group">
+                <MenuItem Command="{Binding AddGroupCommand}" Header="グループを追加" />
+            </MenuItem>
         </Menu>
 
         <ListView
             Name="listView"
             Grid.Row="1"
+            Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
             ItemsSource="{Binding TodoLists.Todos}"
             SelectedItem="{Binding TodoLists.SelectionItem}" />
 
-        <StatusBar Grid.Row="2">
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Margin="3"
+                Text="Groups" />
+
+            <ListView
+                Grid.Row="1"
+                ItemTemplate="{StaticResource GroupListViewDataTemplate}"
+                ItemsSource="{Binding TodoLists.Groups}"
+                SelectedItem="{Binding TodoLists.CurrentGroup}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+
+        </Grid>
+
+        <StatusBar
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <StatusBarItem Content="status bar" />
         </StatusBar>
 
