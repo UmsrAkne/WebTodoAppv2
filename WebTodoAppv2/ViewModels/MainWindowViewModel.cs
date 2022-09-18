@@ -56,6 +56,17 @@
             TodoLists.CurrentGroup = currentGroup;
         });
 
+        public DelegateCommand<Group> StartGroupNameEditCommand => new DelegateCommand<Group>((group) =>
+        {
+            group.EditMode = true;
+        });
+
+        public DelegateCommand<Group> ConfirmGroupNameCommand => new DelegateCommand<Group>((group) =>
+        {
+            todoDbContext.SaveChanges();
+            group.EditMode = false;
+        });
+
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
         {
             if (TodoLists.SelectionItem != null)
