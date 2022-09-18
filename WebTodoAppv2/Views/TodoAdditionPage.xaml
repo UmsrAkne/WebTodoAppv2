@@ -32,7 +32,7 @@
             <TextBox
                 x:Name="titleTextBox"
                 Grid.Column="1"
-                Text="{Binding TodoTitle}" />
+                Text="{Binding TodoTitle, UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>
 
