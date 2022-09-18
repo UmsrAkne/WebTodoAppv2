@@ -136,7 +136,7 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBox Margin="5,0" Text="{Binding Name}">
+                <TextBox Margin="5,0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
                             <Style.Triggers>
@@ -150,6 +150,13 @@
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=window}" CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
                 </TextBox>
             </StackPanel>
 
