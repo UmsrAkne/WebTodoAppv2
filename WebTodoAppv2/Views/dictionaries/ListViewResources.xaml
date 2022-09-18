@@ -117,8 +117,51 @@
     </DataTemplate>
 
     <DataTemplate x:Key="GroupListViewDataTemplate">
-        <Border>
-            <TextBlock Margin="5,0" Text="{Binding Name}" />
+        <Border Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}">
+            <StackPanel>
+                <TextBlock Margin="5,0" Text="{Binding Name}">
+
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EditMode}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding EditMode}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBox Margin="5,0" Text="{Binding Name}">
+                    <TextBox.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EditMode}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding EditMode}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </StackPanel>
+
+            <Border.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding PlacementTarget.Tag.StartGroupNameEditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        CommandParameter="{Binding}"
+                        Header="test" />
+                </ContextMenu>
+            </Border.ContextMenu>
+
         </Border>
     </DataTemplate>
 
