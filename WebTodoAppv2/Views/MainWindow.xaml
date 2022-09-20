@@ -86,7 +86,11 @@
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2">
-            <StatusBarItem Content="status bar" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="表示中のTodo : " />
+                <TextBlock Text="{Binding TodoLists.Todos.Count}" />
+
+            </StackPanel>
         </StatusBar>
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
