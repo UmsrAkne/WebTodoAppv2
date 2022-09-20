@@ -61,6 +61,14 @@
                     Margin="10,0"
                     Background="Gray" />
 
+                <TextBlock Grid.Column="0" Text="総作業時間 : " />
+                <TextBlock Grid.Column="1" Text="{Binding TotalWorkingTimeSpan}" />
+
+                <Border
+                    Width="1"
+                    Margin="10,0"
+                    Background="Gray" />
+
                 <TextBlock Grid.Column="0" Text="締め切り : " />
                 <TextBlock Grid.Column="1" Text="{Binding Todo.LimitDateTime}" />
 
