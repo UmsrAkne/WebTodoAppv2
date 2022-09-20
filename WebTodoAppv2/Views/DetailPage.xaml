@@ -2,6 +2,7 @@
     x:Class="WebTodoAppv2.Views.DetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WebTodoAppv2.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,6 +16,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="dictionaries/ListViewResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:TimeSpanConverter x:Key="TimeSpanConverter" />
 
         </ResourceDictionary>
     </Page.Resources>
@@ -55,6 +58,14 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
+
+                <Border
+                    Width="1"
+                    Margin="10,0"
+                    Background="Gray" />
+
+                <TextBlock Grid.Column="0" Text="総作業時間 : " />
+                <TextBlock Grid.Column="1" Text="{Binding TotalWorkingTimeSpan, Converter={StaticResource TimeSpanConverter}}" />
 
                 <Border
                     Width="1"

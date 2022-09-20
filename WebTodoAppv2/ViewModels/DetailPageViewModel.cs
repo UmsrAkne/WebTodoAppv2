@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Services.Dialogs;
@@ -12,12 +13,14 @@
     {
         private TodoDbContext todoDbContext;
         private string commentText;
+        private TimeSpan totalWorkingTimeSpan;
 
         public DetailPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
             this.todoDbContext = todoDbContext;
             TodoLists = todoLists;
             Todo = TodoLists.SelectionItem;
+            Reload();
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -29,6 +32,8 @@
         public Todo Todo { get; set; }
 
         public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
+
+        public TimeSpan TotalWorkingTimeSpan { get => totalWorkingTimeSpan; set => SetProperty(ref totalWorkingTimeSpan, value); }
 
         public DelegateCommand ChangeTodoStateCommand => new DelegateCommand(() =>
         {
@@ -91,7 +96,53 @@
             if (Todo != null)
             {
                 TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+                TotalWorkingTimeSpan = GetTotalWorkingTimeSpan();
             }
+        }
+
+        private TimeSpan GetTotalWorkingTimeSpan()
+        {
+            var operations = todoDbContext.Operations.Where(op => op.TodoId == Todo.Id).OrderBy(op => op.DateTime);
+
+            // はじめに、まだ作業に取り掛かっていない場合と、作業開始せずに完了しているケースを潰す
+            if (!operations.Any() || operations.All(op => op.Kind == OperationKind.Complete))
+            {
+                return TotalWorkingTimeSpan = TimeSpan.Zero;
+            }
+
+            // 作業時間算出に必要な変数
+            DateTime startPoint = default;
+            DateTime endPoint = default;
+            TimeSpan total = default;
+
+            foreach (var op in operations)
+            {
+                if (op.Kind == OperationKind.Start || op.Kind == OperationKind.Resume)
+                {
+                    startPoint = op.DateTime;
+                }
+
+                if (op.Kind == OperationKind.Pause || op.Kind == OperationKind.Complete)
+                {
+                    endPoint = op.DateTime;
+                }
+
+                // 開始点と終了点の組が確定した時点で作業時間を算出して変数を初期化
+                if (startPoint != default && endPoint != default)
+                {
+                    total += endPoint - startPoint;
+                    startPoint = default;
+                    endPoint = default;
+                }
+            }
+
+            // 作業を開始後、まだ終了していないケースでは、現在の時間との差を取る
+            if (startPoint != default && endPoint == default)
+            {
+                total += DateTime.Now - startPoint;
+            }
+
+            return total;
         }
 
         public bool CanCloseDialog() => true;

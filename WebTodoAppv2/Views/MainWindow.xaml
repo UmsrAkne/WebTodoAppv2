@@ -43,6 +43,11 @@
             Grid.Column="0"
             Grid.ColumnSpan="2">
             <MenuItem Header="File" />
+
+            <MenuItem Header="Todo">
+                <MenuItem Command="{Binding ShowTodoAdditionPageCommand}" Header="Todo を追加" />
+            </MenuItem>
+
             <MenuItem Header="Group">
                 <MenuItem Command="{Binding AddGroupCommand}" Header="グループを追加" />
             </MenuItem>
