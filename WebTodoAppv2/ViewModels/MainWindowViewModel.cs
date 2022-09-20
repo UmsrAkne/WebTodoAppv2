@@ -15,6 +15,8 @@
         private string title = "Web todo app v2";
         private IDialogService dialogService;
 
+        private int completeTodoCount;
+
         private TodoDbContext todoDbContext;
 
         public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists, IDialogService dialogService)
@@ -35,10 +37,13 @@
 
         public TodoLists TodoLists { get; private set; }
 
+        public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
+
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
             TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TodoLists.CurrentGroup));
             TodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+            CompleteTodoCount = TodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         });
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
