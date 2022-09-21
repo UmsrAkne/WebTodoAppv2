@@ -14,6 +14,7 @@
         private TodoDbContext todoDbContext;
         private string commentText;
         private TimeSpan totalWorkingTimeSpan;
+        private bool canResetTodo;
 
         public DetailPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
@@ -34,6 +35,8 @@
         public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
 
         public TimeSpan TotalWorkingTimeSpan { get => totalWorkingTimeSpan; set => SetProperty(ref totalWorkingTimeSpan, value); }
+
+        public bool CanResetTodo { get => canResetTodo; set => SetProperty(ref canResetTodo, value); }
 
         public DelegateCommand ChangeTodoStateCommand => new DelegateCommand(() =>
         {
@@ -75,6 +78,13 @@
             Reload();
         });
 
+        public DelegateCommand SwitchToIncompleteCommand => new DelegateCommand(() =>
+        {
+            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.SwitchToIncomplete, DateTime = DateTime.Now, TodoId = Todo.Id });
+            Todo.WorkingState = WorkingState.InitialState;
+            Reload();
+        });
+
         public DelegateCommand AddCommentCommand => new DelegateCommand(() =>
         {
             if (Todo != null)
@@ -97,6 +107,13 @@
             {
                 TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
                 TotalWorkingTimeSpan = GetTotalWorkingTimeSpan();
+
+                var lastOperation = todoDbContext.Operations
+                    .Where(o => o.TodoId == Todo.Id)
+                    .OrderBy(o => o.DateTime)
+                    .LastOrDefault();
+
+                CanResetTodo = lastOperation != null && lastOperation.Kind == OperationKind.Complete;
             }
         }
 

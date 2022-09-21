@@ -82,6 +82,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition Width="0.5*" />
                 </Grid.ColumnDefinitions>
 
                 <Button
@@ -117,6 +118,7 @@
 
                 <Button
                     Grid.Column="1"
+                    Margin="10,0"
                     Command="{Binding CompleteTodoCommand}"
                     Content="Complete">
 
@@ -133,6 +135,23 @@
                         </Style>
                     </Button.Style>
 
+                </Button>
+
+                <Button
+                    Grid.Column="2"
+                    Command="{Binding SwitchToIncompleteCommand}"
+                    Content="Reset"
+                    IsEnabled="{Binding CanResetTodo}">
+
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CanResetTodo}" Value="False">
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
 
             </Grid>
