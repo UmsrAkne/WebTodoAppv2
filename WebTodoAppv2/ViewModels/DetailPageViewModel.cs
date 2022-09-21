@@ -100,6 +100,20 @@
             }
         }
 
+        public bool CanCloseDialog() => true;
+
+        public void OnDialogClosed()
+        {
+        }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+            if (TodoLists.SelectionItem != null)
+            {
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+            }
+        }
+
         private TimeSpan GetTotalWorkingTimeSpan()
         {
             var operations = todoDbContext.Operations.Where(op => op.TodoId == Todo.Id).OrderBy(op => op.DateTime);
@@ -143,20 +157,6 @@
             }
 
             return total;
-        }
-
-        public bool CanCloseDialog() => true;
-
-        public void OnDialogClosed()
-        {
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
-            if (TodoLists.SelectionItem != null)
-            {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
-            }
         }
     }
 }
