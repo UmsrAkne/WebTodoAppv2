@@ -34,8 +34,8 @@
             <TextBlock Text="{Binding Todo.Title}" />
 
             <StackPanel Margin="0,4" Orientation="Horizontal">
-                <TextBlock Grid.Column="0" Text="作業状態 : " />
-                <TextBlock Grid.Column="1">
+                <TextBlock Text="作業状態 : " />
+                <TextBlock>
                     <TextBlock.Style>
                         <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                             <Style.Triggers>
@@ -65,23 +65,20 @@
                     Margin="10,0"
                     Background="Gray" />
 
-                <TextBlock Grid.Column="0" Text="総作業時間 : " />
-                <TextBlock Grid.Column="1" Text="{Binding TotalWorkingTimeSpan, Converter={StaticResource TimeSpanConverter}}" />
+                <TextBlock Text="総作業時間 : " />
+                <TextBlock Text="{Binding TotalWorkingTimeSpan, Converter={StaticResource TimeSpanConverter}}" />
 
                 <Border
                     Width="1"
                     Margin="10,0"
                     Background="Gray" />
 
-                <TextBlock Grid.Column="0" Text="締め切り : " />
-                <TextBlock Grid.Column="1" Text="{Binding Todo.LimitDateTime}" />
+                <TextBlock Text="締め切り : " />
+                <TextBlock Text="{Binding Todo.LimitDateTime}" />
 
             </StackPanel>
 
-            <TextBlock
-                Grid.Row="2"
-                Margin="0,4"
-                Text="{Binding Todo.Detail}" />
+            <TextBlock Margin="0,4" Text="{Binding Todo.Detail}" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
