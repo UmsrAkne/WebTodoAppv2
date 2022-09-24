@@ -28,11 +28,35 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="タイトル" />
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,2"
+                Text="タイトル" />
+
             <TextBox
                 x:Name="titleTextBox"
+                Grid.Row="0"
                 Grid.Column="1"
+                Margin="0,2"
                 Text="{Binding TodoTitle, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,2"
+                Text="詳細" />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,2"
+                Text="{Binding Detail, UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>
 

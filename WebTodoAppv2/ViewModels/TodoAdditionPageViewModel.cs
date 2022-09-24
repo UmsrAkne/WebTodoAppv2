@@ -11,6 +11,7 @@
     {
         private TodoDbContext todoDbContext;
         private string todoTitle;
+        private string detail;
         private Group currentGroup;
 
         // デフォルトは ２４時間後を期限とする
@@ -30,13 +31,21 @@
 
         public string TodoTitle { get => todoTitle; set => SetProperty(ref todoTitle, value); }
 
+        public string Detail { get => detail; set => SetProperty(ref detail, value); }
+
         public string RemainingHour { get => remainingHour; set => SetProperty(ref remainingHour, value); }
 
         public bool CreateAsCompletedTodo { get => createAsCompletedTodo; set => SetProperty(ref createAsCompletedTodo, value); }
 
         public DelegateCommand AddTodoCommand => new DelegateCommand(() =>
         {
-            var todo = new Todo { Title = TodoTitle, CreationDateTime = DateTime.Now, GroupId = currentGroup.Id };
+            var todo = new Todo()
+            {
+                Title = TodoTitle,
+                Detail = Detail,
+                CreationDateTime = DateTime.Now,
+                GroupId = currentGroup.Id,
+            };
 
             if (int.TryParse(RemainingHour, out var remainingTime))
             {

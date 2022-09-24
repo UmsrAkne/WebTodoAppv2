@@ -17,6 +17,9 @@
         public string Title { get; set; } = string.Empty;
 
         [Required]
+        public string Detail { get; set; } = string.Empty;
+
+        [Required]
         public DateTime CreationDateTime { get; set; }
 
         [Required]
