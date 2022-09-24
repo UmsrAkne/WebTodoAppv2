@@ -12,12 +12,11 @@
 
     public class MainWindowViewModel : BindableBase
     {
+        private readonly IDialogService dialogService;
+        private readonly TodoDbContext todoDbContext;
         private string title = "Web todo app v2";
-        private IDialogService dialogService;
 
         private int completeTodoCount;
-
-        private TodoDbContext todoDbContext;
 
         public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists, IDialogService dialogService)
         {
@@ -76,13 +75,13 @@
         {
             if (TodoLists.SelectionItem != null)
             {
-                dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), result => { });
+                dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), _ => { });
             }
         });
 
         public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
         {
-            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), result => { });
+            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), _ => { });
             ReloadCommand.Execute();
         });
     }
