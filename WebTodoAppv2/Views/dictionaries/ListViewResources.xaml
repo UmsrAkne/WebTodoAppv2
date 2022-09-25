@@ -2,7 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:models="clr-namespace:WebTodoAppv2.Models">
 
     <Style x:Key="RadiusButtonStyle" TargetType="Button">
 
@@ -30,8 +31,7 @@
 
     </Style>
 
-    <DataTemplate x:Key="ListViewDataTemplate">
-
+    <DataTemplate x:Key="ListViewDataTemplate" DataType="{x:Type models:Todo}">
         <DataTemplate.Resources>
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
@@ -40,7 +40,7 @@
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=window}" />
+                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Border>
@@ -56,7 +56,7 @@
                         Grid.Column="0"
                         Margin="5,0"
                         VerticalAlignment="Center"
-                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
+                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=Window}"
                         CommandParameter="{Binding}">
 
                         <CheckBox.Style>
@@ -99,7 +99,7 @@
 
     </DataTemplate>
 
-    <DataTemplate x:Key="DetailListViewDataTemplate">
+    <DataTemplate x:Key="DetailListViewDataTemplate" DataType="{x:Type models:Todo}">
 
         <DataTemplate.Resources>
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
@@ -123,7 +123,7 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="GroupListViewDataTemplate">
+    <DataTemplate x:Key="GroupListViewDataTemplate" DataType="{x:Type models:Group}">
         <Border Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}">
             <StackPanel>
                 <TextBlock Margin="5,0" Text="{Binding Name}">
@@ -160,7 +160,7 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=window}" CommandParameter="{Binding}" />
+                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=Window}" CommandParameter="{Binding}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
