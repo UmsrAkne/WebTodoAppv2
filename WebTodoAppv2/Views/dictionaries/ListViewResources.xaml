@@ -31,7 +31,6 @@
     </Style>
 
     <DataTemplate x:Key="ListViewDataTemplate">
-
         <DataTemplate.Resources>
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
@@ -40,7 +39,7 @@
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=window}" />
+                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Border>
@@ -56,7 +55,7 @@
                         Grid.Column="0"
                         Margin="5,0"
                         VerticalAlignment="Center"
-                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=window}"
+                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=Window}"
                         CommandParameter="{Binding}">
 
                         <CheckBox.Style>
@@ -160,7 +159,7 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=window}" CommandParameter="{Binding}" />
+                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=Window}" CommandParameter="{Binding}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
