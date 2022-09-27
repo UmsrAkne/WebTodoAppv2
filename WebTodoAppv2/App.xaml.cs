@@ -1,7 +1,6 @@
-﻿using System.IO;
-
-namespace WebTodoAppv2
+﻿namespace WebTodoAppv2
 {
+    using System.IO;
     using System.Windows;
     using Prism.Ioc;
     using Prism.Unity;
@@ -55,6 +54,17 @@ namespace WebTodoAppv2
             if (!Directory.Exists(templateDirectoryName))
             {
                 Directory.CreateDirectory(templateDirectoryName);
+
+                using var jsonFile = File.CreateText($@"{templateDirectoryName}/template.json");
+
+                jsonFile.WriteLine(@"[");
+                jsonFile.WriteLine(@"   {");
+                jsonFile.WriteLine(@"       ""Title"" : ""default"",");
+                jsonFile.WriteLine(@"       ""Detail"" : """",");
+                jsonFile.WriteLine(@"       ""LimitDateTime""  : ""1d"",");
+                jsonFile.WriteLine(@"       ""GroupName"" : ""defaultGroupName""");
+                jsonFile.WriteLine(@"    }");
+                jsonFile.WriteLine(@"]");
             }
 
             base.OnStartup(e);
