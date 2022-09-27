@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:WebTodoAppv2.Models"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewModels="clr-namespace:WebTodoAppv2.ViewModels"
     Name="Window"
@@ -13,7 +14,12 @@
     Height="800"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    AllowDrop="True"
     mc:Ignorable="d">
+
+    <i:Interaction.Behaviors>
+        <models:DropBehavior />
+    </i:Interaction.Behaviors>
 
     <Window.Resources>
         <ResourceDictionary>
