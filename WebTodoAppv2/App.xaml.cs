@@ -1,4 +1,6 @@
-﻿namespace WebTodoAppv2
+﻿using System.IO;
+
+namespace WebTodoAppv2
 {
     using System.Windows;
     using Prism.Ioc;
@@ -49,6 +51,12 @@
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            const string templateDirectoryName = "templates";
+            if (!Directory.Exists(templateDirectoryName))
+            {
+                Directory.CreateDirectory(templateDirectoryName);
+            }
+
             base.OnStartup(e);
         }
     }
