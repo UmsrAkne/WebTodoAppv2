@@ -1,5 +1,9 @@
+using System.Linq;
+
 namespace WebTodoAppv2.Models
 {
+    using System.IO;
+    using System.Text.Json;
     using System.Windows;
     using Microsoft.Xaml.Behaviors;
     using WebTodoAppv2.ViewModels;
@@ -30,9 +34,18 @@ namespace WebTodoAppv2.Models
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             var vm = ((Window)sender).DataContext as MainWindowViewModel;
 
-            if (files != null)
+            if (files == null)
             {
-                // vm.CurrentFileInfo = new System.IO.FileInfo(files[0]);
+                return;
+            }
+
+            using var sr = new StreamReader(files[0]);
+            var jsonText = sr.ReadToEnd();
+            var todos = JsonSerializer.Deserialize<TodoTemplate[]>(jsonText, new JsonSerializerOptions());
+
+            if (vm != null && todos != null)
+            {
+                vm.AddTodo(todos.ToList());
             }
         }
 

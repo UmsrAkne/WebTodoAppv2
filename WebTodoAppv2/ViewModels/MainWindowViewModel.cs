@@ -1,4 +1,6 @@
-﻿namespace WebTodoAppv2.ViewModels
+﻿using System.Collections.Generic;
+
+namespace WebTodoAppv2.ViewModels
 {
     using System;
     using System.Collections.ObjectModel;
@@ -84,5 +86,27 @@
             dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), _ => { });
             ReloadCommand.Execute();
         });
+
+        public void AddTodo(List<TodoTemplate> templates)
+        {
+           var groupNames = todoDbContext.GetGroups();
+
+           templates.ForEach(t =>
+           {
+               var todo = new Todo
+               {
+                   Title = t.Title,
+                   Detail = t.Detail,
+                   LimitDateTime = DateTime.Now + t.LimitTime,
+                   CreationDateTime = DateTime.Now,
+               };
+
+               var group = groupNames.FirstOrDefault(g => t.GroupName == g.Name);
+               todo.GroupId = group?.Id ?? 1;
+               todoDbContext.AddTodo(todo);
+           });
+
+           ReloadCommand.Execute();
+        }
     }
 }
