@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="5,5">
-            <TextBlock Text="{Binding Todo.Title}" />
+            <TextBox Text="{Binding Todo.Title, UpdateSourceTrigger=PropertyChanged}" />
 
             <StackPanel Margin="0,4" Orientation="Horizontal">
                 <TextBlock Text="作業状態 : " />

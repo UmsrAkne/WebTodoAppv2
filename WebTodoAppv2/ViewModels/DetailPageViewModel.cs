@@ -121,6 +121,7 @@
 
         public void OnDialogClosed()
         {
+            todoDbContext.SaveChanges();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)

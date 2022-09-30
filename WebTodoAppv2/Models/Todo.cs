@@ -8,13 +8,14 @@
     public class Todo : BindableBase, ITimeTableItem
     {
         private WorkingState workingState;
+        private string title = string.Empty;
 
         [Key]
         [Required]
         public int Id { get; set; }
 
         [Required]
-        public string Title { get; set; } = string.Empty;
+        public string Title { get => title; set => SetProperty(ref title, value); }
 
         [Required]
         public string Detail { get; set; } = string.Empty;
