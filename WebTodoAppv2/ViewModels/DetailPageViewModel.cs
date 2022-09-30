@@ -113,7 +113,7 @@
                     .OrderBy(o => o.DateTime)
                     .LastOrDefault();
 
-                CanResetTodo = lastOperation != null && lastOperation.Kind == OperationKind.Complete;
+                CanResetTodo = lastOperation is { Kind: OperationKind.Complete };
             }
         }
 
