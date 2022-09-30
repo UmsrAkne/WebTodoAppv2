@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="5,5">
-            <TextBlock Text="{Binding Todo.Title}" />
+            <TextBox Text="{Binding Todo.Title, UpdateSourceTrigger=PropertyChanged}" />
 
             <StackPanel Margin="0,4" Orientation="Horizontal">
                 <TextBlock Text="作業状態 : " />
@@ -79,7 +79,19 @@
 
             </StackPanel>
 
-            <TextBlock Margin="0,4" Text="{Binding Todo.Detail}" />
+            <Grid Margin="0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="0,0,8,0"
+                    Text="詳細 :" />
+                <TextBox Grid.Column="1" Text="{Binding Todo.Detail, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
 
             <Grid>
                 <Grid.ColumnDefinitions>
