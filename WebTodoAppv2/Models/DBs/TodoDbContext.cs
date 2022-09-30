@@ -23,6 +23,12 @@
 
         public void AddTodo(Todo todo)
         {
+            if (todo.GroupName != string.Empty)
+            {
+                var group = Groups.FirstOrDefault(g => g.Name == todo.GroupName);
+                todo.GroupId = group?.Id ?? 1;
+            }
+
             Todos.Add(todo);
             SaveChanges();
         }
