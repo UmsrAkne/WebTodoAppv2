@@ -11,7 +11,7 @@
 
     public class DetailPageViewModel : BindableBase, IDialogAware
     {
-        private TodoDbContext todoDbContext;
+        private readonly TodoDbContext todoDbContext;
         private string commentText;
         private TimeSpan totalWorkingTimeSpan;
         private bool canResetTodo;
@@ -34,7 +34,7 @@
 
         public string CommentText { get => commentText; set => SetProperty(ref commentText, value); }
 
-        public TimeSpan TotalWorkingTimeSpan { get => totalWorkingTimeSpan; set => SetProperty(ref totalWorkingTimeSpan, value); }
+        public TimeSpan TotalWorkingTimeSpan { get => totalWorkingTimeSpan; private set => SetProperty(ref totalWorkingTimeSpan, value); }
 
         public bool CanResetTodo { get => canResetTodo; set => SetProperty(ref canResetTodo, value); }
 
@@ -101,7 +101,7 @@
             }
         });
 
-        public void Reload()
+        private void Reload()
         {
             if (Todo != null)
             {
