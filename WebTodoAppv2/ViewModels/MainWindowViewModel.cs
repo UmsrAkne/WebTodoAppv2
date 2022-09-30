@@ -99,10 +99,9 @@ namespace WebTodoAppv2.ViewModels
                    Detail = t.Detail,
                    LimitDateTime = DateTime.Now + t.LimitTime,
                    CreationDateTime = DateTime.Now,
+                   GroupName = t.GroupName,
                };
 
-               var group = groupNames.FirstOrDefault(g => t.GroupName == g.Name);
-               todo.GroupId = group?.Id ?? 1;
                todoDbContext.AddTodo(todo);
            });
 

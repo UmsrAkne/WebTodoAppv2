@@ -38,5 +38,8 @@
 
         [NotMapped]
         public string Text { get => "Created"; set => _ = value; }
+
+        [NotMapped]
+        public string GroupName { get; set; } = string.Empty;
     }
 }
