@@ -9,6 +9,7 @@
     {
         private WorkingState workingState;
         private string title = string.Empty;
+        private string detail = string.Empty;
 
         [Key]
         [Required]
@@ -18,7 +19,7 @@
         public string Title { get => title; set => SetProperty(ref title, value); }
 
         [Required]
-        public string Detail { get; set; } = string.Empty;
+        public string Detail { get => detail; set => SetProperty(ref detail, value); }
 
         [Required]
         public DateTime CreationDateTime { get; set; }

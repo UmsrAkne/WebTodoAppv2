@@ -79,7 +79,7 @@
 
             </StackPanel>
 
-            <TextBlock Margin="0,4" Text="{Binding Todo.Detail}" />
+            <TextBox Margin="0,4" Text="{Binding Todo.Detail, UpdateSourceTrigger=PropertyChanged}" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
