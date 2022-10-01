@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:WebTodoAppv2.Models"
     xmlns:viewModels="clr-namespace:WebTodoAppv2.ViewModels"
     Title="Todo Detail"
     Width="800"
@@ -76,6 +77,20 @@
 
                 <TextBlock Text="締め切り : " />
                 <TextBlock Text="{Binding Todo.LimitDateTime}" />
+
+                <Border
+                    Width="1"
+                    Margin="10,0"
+                    Background="Gray" />
+
+                <TextBlock Margin="0,0,6,0" Text="グループ : " />
+                <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding CurrentGroup}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Group}">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
             </StackPanel>
 

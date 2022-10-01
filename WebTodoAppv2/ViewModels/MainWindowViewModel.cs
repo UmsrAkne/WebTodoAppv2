@@ -75,10 +75,13 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
         {
-            if (TodoLists.SelectionItem != null)
+            if (TodoLists.SelectionItem == null)
             {
-                dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), _ => { });
+                return;
             }
+
+            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), _ => { });
+            ReloadCommand.Execute();
         });
 
         public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
