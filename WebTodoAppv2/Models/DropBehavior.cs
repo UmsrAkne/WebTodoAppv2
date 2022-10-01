@@ -1,13 +1,12 @@
+using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Windows;
+using Microsoft.Xaml.Behaviors;
+using WebTodoAppv2.ViewModels;
 
 namespace WebTodoAppv2.Models
 {
-    using System.IO;
-    using System.Text.Json;
-    using System.Windows;
-    using Microsoft.Xaml.Behaviors;
-    using WebTodoAppv2.ViewModels;
-
     public class DropBehavior : Behavior<Window>
     {
         protected override void OnAttached()

@@ -10,12 +10,14 @@
         [Required]
         public int Id { get; set; }
 
+        // ReSharper disable once PropertyCanBeMadeInitOnly.Global
         [Required]
         public OperationKind Kind { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
 
+        // ReSharper disable once PropertyCanBeMadeInitOnly.Global
         [Required]
         public int TodoId { get; set; }
 

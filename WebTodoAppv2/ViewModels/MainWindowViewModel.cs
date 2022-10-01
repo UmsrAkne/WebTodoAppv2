@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Services.Dialogs;
+using WebTodoAppv2.Models;
+using WebTodoAppv2.Models.DBs;
+using WebTodoAppv2.Views;
 
 namespace WebTodoAppv2.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using Prism.Commands;
-    using Prism.Mvvm;
-    using Prism.Services.Dialogs;
-    using WebTodoAppv2.Models;
-    using WebTodoAppv2.Models.DBs;
-    using WebTodoAppv2.Views;
-
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BindableBase
     {
         private readonly IDialogService dialogService;
@@ -38,6 +38,7 @@ namespace WebTodoAppv2.ViewModels
 
         public TodoLists TodoLists { get; private set; }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
@@ -92,8 +93,6 @@ namespace WebTodoAppv2.ViewModels
 
         public void AddTodo(List<TodoTemplate> templates)
         {
-           var groupNames = todoDbContext.GetGroups();
-
            templates.ForEach(t =>
            {
                var todo = new Todo

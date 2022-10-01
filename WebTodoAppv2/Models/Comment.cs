@@ -9,6 +9,7 @@
         [Required]
         public int Id { get; set; }
 
+        // ReSharper disable once PropertyCanBeMadeInitOnly.Global
         [Required]
         public int TodoId { get; set; }
 
