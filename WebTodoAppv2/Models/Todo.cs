@@ -11,6 +11,7 @@
         private string title = string.Empty;
         private string detail = string.Empty;
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         [Key]
         [Required]
         public int Id { get; set; }
@@ -40,6 +41,6 @@
         public string Text { get => "Created"; set => _ = value; }
 
         [NotMapped]
-        public string GroupName { get; set; } = string.Empty;
+        public string GroupName { get; init; } = string.Empty;
     }
 }

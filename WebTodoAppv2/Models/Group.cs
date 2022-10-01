@@ -8,6 +8,7 @@
         private string name;
         private bool editMode;
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int Id { get; set; }
 
         public string Name { get => name; set => SetProperty(ref name, value); }
