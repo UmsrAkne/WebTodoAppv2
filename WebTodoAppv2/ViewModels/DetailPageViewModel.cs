@@ -1,6 +1,7 @@
 ﻿namespace WebTodoAppv2.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using Prism.Commands;
@@ -15,6 +16,8 @@
         private string commentText;
         private TimeSpan totalWorkingTimeSpan;
         private bool canResetTodo;
+        private List<Group> groups;
+        private Group currentGroup;
 
         public DetailPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
         {
@@ -37,6 +40,19 @@
         public TimeSpan TotalWorkingTimeSpan { get => totalWorkingTimeSpan; private set => SetProperty(ref totalWorkingTimeSpan, value); }
 
         public bool CanResetTodo { get => canResetTodo; set => SetProperty(ref canResetTodo, value); }
+
+        public List<Group> Groups { get => groups; set => SetProperty(ref groups, value); }
+
+        public Group CurrentGroup
+        {
+            get => currentGroup;
+            set
+            {
+                SetProperty(ref currentGroup, value);
+                Todo.GroupId = value.Id;
+                todoDbContext.SaveChanges();
+            }
+        }
 
         public DelegateCommand ChangeTodoStateCommand => new DelegateCommand(() =>
         {
@@ -103,18 +119,23 @@
 
         private void Reload()
         {
-            if (Todo != null)
+            if (Todo == null)
             {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
-                TotalWorkingTimeSpan = GetTotalWorkingTimeSpan();
-
-                var lastOperation = todoDbContext.Operations
-                    .Where(o => o.TodoId == Todo.Id)
-                    .OrderBy(o => o.DateTime)
-                    .LastOrDefault();
-
-                CanResetTodo = lastOperation is { Kind: OperationKind.Complete };
+                return;
             }
+
+            TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+            TotalWorkingTimeSpan = GetTotalWorkingTimeSpan();
+
+            var lastOperation = todoDbContext.Operations
+                .Where(o => o.TodoId == Todo.Id)
+                .OrderBy(o => o.DateTime)
+                .LastOrDefault();
+
+            CanResetTodo = lastOperation is { Kind: OperationKind.Complete };
+
+            Groups = todoDbContext.GetGroups();
+            CurrentGroup = Groups.FirstOrDefault(g => g.Id == Todo.GroupId);
         }
 
         public bool CanCloseDialog() => true;
