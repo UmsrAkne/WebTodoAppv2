@@ -117,6 +117,21 @@ namespace WebTodoAppv2.ViewModels
             }
         });
 
+        public bool CanCloseDialog() => true;
+
+        public void OnDialogClosed()
+        {
+            todoDbContext.SaveChanges();
+        }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+            if (TodoLists.SelectionItem != null)
+            {
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+            }
+        }
+
         private void Reload()
         {
             if (Todo == null)
@@ -136,21 +151,6 @@ namespace WebTodoAppv2.ViewModels
 
             Groups = todoDbContext.GetGroups();
             CurrentGroup = Groups.FirstOrDefault(g => g.Id == Todo.GroupId);
-        }
-
-        public bool CanCloseDialog() => true;
-
-        public void OnDialogClosed()
-        {
-            todoDbContext.SaveChanges();
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
-            if (TodoLists.SelectionItem != null)
-            {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
-            }
         }
 
         private TimeSpan GetTotalWorkingTimeSpan()

@@ -169,6 +169,7 @@
 
             <Border.ContextMenu>
                 <ContextMenu>
+                    <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
                     <MenuItem
                         Command="{Binding PlacementTarget.Tag.StartGroupNameEditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                         CommandParameter="{Binding}"
