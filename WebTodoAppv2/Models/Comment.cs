@@ -1,8 +1,8 @@
-﻿namespace WebTodoAppv2.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace WebTodoAppv2.Models
+{
     public class Comment : ITimeTableItem
     {
         [Key]

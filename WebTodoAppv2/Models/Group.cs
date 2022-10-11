@@ -1,8 +1,8 @@
-﻿namespace WebTodoAppv2.Models
-{
-    using System.ComponentModel.DataAnnotations.Schema;
-    using Prism.Mvvm;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Prism.Mvvm;
 
+namespace WebTodoAppv2.Models
+{
     public class Group : BindableBase
     {
         private string name;

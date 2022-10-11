@@ -1,8 +1,8 @@
-﻿namespace WebTodoAppv2.Models
-{
-    using System.Collections.ObjectModel;
-    using Prism.Mvvm;
+﻿using System.Collections.ObjectModel;
+using Prism.Mvvm;
 
+namespace WebTodoAppv2.Models
+{
     public class TodoLists : BindableBase
     {
         private ObservableCollection<Todo> todos;

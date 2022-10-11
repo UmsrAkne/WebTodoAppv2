@@ -1,10 +1,10 @@
-﻿namespace WebTodoAppv2.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using Prism.Mvvm;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Prism.Mvvm;
 
+namespace WebTodoAppv2.Models
+{
     public class Todo : BindableBase, ITimeTableItem
     {
         private WorkingState workingState;
