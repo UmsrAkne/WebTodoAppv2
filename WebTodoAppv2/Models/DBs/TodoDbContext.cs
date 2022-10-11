@@ -1,11 +1,11 @@
-﻿namespace WebTodoAppv2.Models.DBs
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.EntityFrameworkCore;
-    using Npgsql;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
+namespace WebTodoAppv2.Models.DBs
+{
     public class TodoDbContext : DbContext
     {
         public TodoDbContext()

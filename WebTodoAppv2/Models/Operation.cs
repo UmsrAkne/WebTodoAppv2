@@ -1,9 +1,9 @@
-﻿namespace WebTodoAppv2.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace WebTodoAppv2.Models
+{
     public class Operation : ITimeTableItem
     {
         [Key]

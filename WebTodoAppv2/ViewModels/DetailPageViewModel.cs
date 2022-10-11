@@ -1,15 +1,15 @@
-﻿namespace WebTodoAppv2.ViewModels
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using Prism.Commands;
-    using Prism.Mvvm;
-    using Prism.Services.Dialogs;
-    using WebTodoAppv2.Models;
-    using WebTodoAppv2.Models.DBs;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Services.Dialogs;
+using WebTodoAppv2.Models;
+using WebTodoAppv2.Models.DBs;
 
+namespace WebTodoAppv2.ViewModels
+{
     public class DetailPageViewModel : BindableBase, IDialogAware
     {
         private readonly TodoDbContext todoDbContext;
@@ -117,6 +117,21 @@
             }
         });
 
+        public bool CanCloseDialog() => true;
+
+        public void OnDialogClosed()
+        {
+            todoDbContext.SaveChanges();
+        }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+            if (TodoLists.SelectionItem != null)
+            {
+                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+            }
+        }
+
         private void Reload()
         {
             if (Todo == null)
@@ -136,21 +151,6 @@
 
             Groups = todoDbContext.GetGroups();
             CurrentGroup = Groups.FirstOrDefault(g => g.Id == Todo.GroupId);
-        }
-
-        public bool CanCloseDialog() => true;
-
-        public void OnDialogClosed()
-        {
-            todoDbContext.SaveChanges();
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
-            if (TodoLists.SelectionItem != null)
-            {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
-            }
         }
 
         private TimeSpan GetTotalWorkingTimeSpan()

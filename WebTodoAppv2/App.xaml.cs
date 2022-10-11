@@ -1,15 +1,15 @@
-﻿namespace WebTodoAppv2
-{
-    using System.IO;
-    using System.Windows;
-    using Prism.Ioc;
-    using Prism.Unity;
-    using Unity;
-    using WebTodoAppv2.Models;
-    using WebTodoAppv2.Models.DBs;
-    using WebTodoAppv2.ViewModels;
-    using WebTodoAppv2.Views;
+﻿using System.IO;
+using System.Windows;
+using Prism.Ioc;
+using Prism.Unity;
+using Unity;
+using WebTodoAppv2.Models;
+using WebTodoAppv2.Models.DBs;
+using WebTodoAppv2.ViewModels;
+using WebTodoAppv2.Views;
 
+namespace WebTodoAppv2
+{
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
