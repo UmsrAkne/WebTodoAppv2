@@ -111,7 +111,7 @@
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border
             x:Name="templateRoot"
-            Background="{TemplateBinding Background}"
+            Background="{StaticResource DarkBgBrush}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             SnapsToDevicePixels="true">
@@ -218,7 +218,7 @@
                     <Border
                         x:Name="SubMenuBorder"
                         Padding="2"
-                        Background="{StaticResource Menu.Static.Background}"
+                        Background="{StaticResource DarkBgBrush}"
                         BorderBrush="{StaticResource Menu.Static.Border}"
                         BorderThickness="1">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -280,7 +280,7 @@
         <Border
             x:Name="templateRoot"
             Height="22"
-            Background="{TemplateBinding Background}"
+            Background="{StaticResource DarkBgBrush}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             SnapsToDevicePixels="true">
@@ -339,6 +339,7 @@
                     Grid.Column="4"
                     Margin="{TemplateBinding Padding}"
                     VerticalAlignment="Center"
+                    Background="Transparent"
                     Opacity="0.7"
                     Text="{TemplateBinding InputGestureText}" />
             </Grid>
@@ -404,7 +405,7 @@
                     Height="22"
                     Margin="-1,0,0,0"
                     VerticalAlignment="Center"
-                    Background="{StaticResource MenuItem.Highlight.Background}"
+                    Background="{StaticResource DarkBgBrush}"
                     BorderBrush="{StaticResource MenuItem.Highlight.Border}"
                     BorderThickness="1"
                     Visibility="Hidden">
@@ -428,6 +429,7 @@
                     Grid.Column="4"
                     Margin="{TemplateBinding Padding}"
                     VerticalAlignment="Center"
+                    Background="Transparent"
                     Opacity="0.7"
                     Text="{TemplateBinding InputGestureText}" />
                 <Path
