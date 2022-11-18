@@ -5,12 +5,23 @@
     xmlns:prism="http://prismlibrary.com/">
 
     <Application.Resources>
+        <SolidColorBrush x:Key="DarkBgBrush" Color="#222222" />
+        <SolidColorBrush x:Key="LightBgBrush" Color="#444444" />
+
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
+            <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
+            <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
+        </Style>
+
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
         </Style>
 
     </Application.Resources>

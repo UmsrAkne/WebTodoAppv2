@@ -25,6 +25,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="dictionaries/ListViewResources.xaml" />
+                <ResourceDictionary Source="dictionaries/MenuItemResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -52,7 +53,8 @@
         <Menu
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Background="{StaticResource DarkBgBrush}">
             <MenuItem Header="File" />
 
             <MenuItem Header="Todo">
@@ -101,7 +103,8 @@
         <StatusBar
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Background="{StaticResource DarkBgBrush}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="4,0" Text="表示中のTodo :" />
                 <TextBlock Margin="4,0" Text="{Binding TodoLists.Todos.Count}" />
