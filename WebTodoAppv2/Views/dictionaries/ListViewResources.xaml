@@ -17,7 +17,11 @@
                         BorderThickness="1"
                         CornerRadius="2">
 
-                        <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Content}" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            Text="{TemplateBinding Content}" />
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -25,7 +29,11 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="LightSalmon" />
+                <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
             </Trigger>
         </Style.Triggers>
 

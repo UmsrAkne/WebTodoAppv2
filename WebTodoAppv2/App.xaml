@@ -6,6 +6,7 @@
 
     <Application.Resources>
         <SolidColorBrush x:Key="DarkBgBrush" Color="#222222" />
+        <SolidColorBrush x:Key="LightBgBrush" Color="#444444" />
 
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
