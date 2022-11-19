@@ -20,6 +20,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:TimeSpanConverter x:Key="TimeSpanConverter" />
+            <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+            </Style>
 
         </ResourceDictionary>
     </Page.Resources>
