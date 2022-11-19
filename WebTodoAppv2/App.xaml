@@ -11,13 +11,11 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Foreground" Value="WhiteSmoke" />
-            <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Foreground" Value="WhiteSmoke" />
-            <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
         </Style>
 
         <Style TargetType="ListView">

@@ -83,7 +83,8 @@
 
             <TextBlock
                 Grid.Row="0"
-                Margin="3"
+                Padding="5,4"
+                Background="{StaticResource DarkBgBrush}"
                 Text="Groups" />
 
             <ListView

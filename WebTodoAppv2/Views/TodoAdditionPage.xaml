@@ -10,6 +10,15 @@
     d:DataContext="{d:DesignInstance viewModels:TodoAdditionPageViewModel}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="dictionaries/ListViewResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Page.InputBindings>
 
         <KeyBinding
@@ -21,7 +30,13 @@
 
     </Page.InputBindings>
 
-    <StackPanel FocusManager.FocusedElement="{Binding ElementName=TitleTextBox}">
+    <StackPanel Background="{StaticResource DarkBgBrush}" FocusManager.FocusedElement="{Binding ElementName=TitleTextBox}">
+
+        <StackPanel.Resources>
+            <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+            </Style>
+        </StackPanel.Resources>
 
         <Grid Margin="4,5">
             <Grid.ColumnDefinitions>
@@ -84,13 +99,15 @@
                 Margin="5"
                 Padding="3"
                 Command="{Binding AddTodoCommand}"
-                Content="作成 (Ctrl + Enter)" />
+                Content="作成 (Ctrl + Enter)"
+                Style="{StaticResource RadiusButtonStyle}" />
 
             <Button
                 Margin="5"
                 Padding="3"
                 Command="{Binding CancelCommand}"
-                Content="キャンセル (Esc)" />
+                Content="キャンセル (Esc)"
+                Style="{StaticResource RadiusButtonStyle}" />
 
         </StackPanel>
     </StackPanel>
