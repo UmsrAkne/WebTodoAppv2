@@ -20,11 +20,11 @@ namespace WebTodoAppv2.ViewModels
 
         private int completeTodoCount;
 
-        public MainWindowViewModel(TodoDbContext dbContext, TodoLists todoLists, IDialogService dialogService)
+        public MainWindowViewModel(TodoDbContext dbContext, TodoLists topTodoLists, IDialogService dialogService)
         {
             todoDbContext = dbContext;
-            TodoLists = todoLists;
-            TodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+            TopTodoLists = topTodoLists;
+            TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
             this.dialogService = dialogService;
 
             ReloadCommand.Execute();
@@ -36,16 +36,16 @@ namespace WebTodoAppv2.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        public TodoLists TodoLists { get; private set; }
+        public TodoLists TopTodoLists { get; private set; }
 
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
-            TodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TodoLists.CurrentGroup));
-            TodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
-            CompleteTodoCount = TodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
+            TopTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TopTodoLists.CurrentGroup));
+            TopTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+            CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         });
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
@@ -57,10 +57,10 @@ namespace WebTodoAppv2.ViewModels
         public DelegateCommand AddGroupCommand => new DelegateCommand(() =>
         {
             todoDbContext.AddGroup(new Group() { Name = "New Group" });
-            var currentGroup = TodoLists.CurrentGroup;
+            var currentGroup = TopTodoLists.CurrentGroup;
             ReloadCommand.Execute();
 
-            TodoLists.CurrentGroup = currentGroup;
+            TopTodoLists.CurrentGroup = currentGroup;
         });
 
         public DelegateCommand<Group> StartGroupNameEditCommand => new DelegateCommand<Group>((group) =>
@@ -76,7 +76,7 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
         {
-            if (TodoLists.SelectionItem == null)
+            if (TopTodoLists.SelectionItem == null)
             {
                 return;
             }
