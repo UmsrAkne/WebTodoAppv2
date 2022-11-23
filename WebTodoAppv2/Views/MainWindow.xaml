@@ -47,6 +47,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
@@ -72,10 +73,11 @@
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding TodoLists.Todos}"
-            SelectedItem="{Binding TodoLists.SelectionItem}" />
+            ItemsSource="{Binding TopTodoLists.Todos}"
+            SelectedItem="{Binding TopTodoLists.SelectionItem}" />
 
         <Grid Grid.Row="1" Grid.Column="0">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition />
@@ -90,8 +92,8 @@
             <ListView
                 Grid.Row="1"
                 ItemTemplate="{StaticResource GroupListViewDataTemplate}"
-                ItemsSource="{Binding TodoLists.Groups}"
-                SelectedItem="{Binding TodoLists.CurrentGroup}">
+                ItemsSource="{Binding TopTodoLists.Groups}"
+                SelectedItem="{Binding TopTodoLists.CurrentGroup}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
@@ -101,14 +103,49 @@
 
         </Grid>
 
-        <StatusBar
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Padding="5,4"
+                Background="{StaticResource DarkBgBrush}"
+                Text="Groups" />
+
+            <ListView
+                Grid.Row="1"
+                ItemTemplate="{StaticResource GroupListViewDataTemplate}"
+                ItemsSource="{Binding TopTodoLists.Groups}"
+                SelectedItem="{Binding TopTodoLists.CurrentGroup}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+
+        </Grid>
+
+        <ListView
+            Name="TodoListViewBottom"
             Grid.Row="2"
+            Grid.Column="1"
+            HorizontalContentAlignment="Stretch"
+            ItemTemplate="{StaticResource ListViewDataTemplate}"
+            ItemsSource="{Binding TopTodoLists.Todos}"
+            SelectedItem="{Binding TopTodoLists.SelectionItem}" />
+
+        <StatusBar
+            Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="{StaticResource DarkBgBrush}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="4,0" Text="表示中のTodo :" />
-                <TextBlock Margin="4,0" Text="{Binding TodoLists.Todos.Count}" />
+                <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
 
                 <Border
                     Width="1"
