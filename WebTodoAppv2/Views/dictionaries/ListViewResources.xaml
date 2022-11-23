@@ -44,66 +44,73 @@
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
 
-        <ContentControl>
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
 
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <Border>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                <CheckBox
+                    Grid.Column="0"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.CompleteTodoCommand, ElementName=Window}"
+                    CommandParameter="{Binding}">
 
-                    <CheckBox
-                        Grid.Column="0"
-                        Margin="5,0"
-                        VerticalAlignment="Center"
-                        Command="{Binding DataContext.CompleteTodoCommand, ElementName=Window}"
-                        CommandParameter="{Binding}">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
 
-                        <CheckBox.Style>
-                            <Style TargetType="CheckBox">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                        <Setter Property="IsChecked" Value="True" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
+                <ContentControl Grid.Column="1">
 
-                    <TextBlock Grid.Column="1" Text="{Binding Title}">
-                        <TextBlock.Style>
-                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
-                                        <Setter Property="Foreground" Value="DarkGray" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-                    <StackPanel Grid.Column="2" Orientation="Horizontal">
-                        <TextBlock Text="{Binding CreationDateTime, Converter={StaticResource DateTimeConverter}}" />
+                    <Border Background="#01ffffff">
 
-                        <TextBlock Margin="5,0" Text="-" />
+                        <DockPanel>
 
-                        <TextBlock Text="{Binding LimitDateTime, Converter={StaticResource DateTimeConverter}}" />
-                    </StackPanel>
+                            <TextBlock Text="{Binding Title}">
+                                <TextBlock.Style>
+                                    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding WorkingState}" Value="Completed">
+                                                <Setter Property="Foreground" Value="DarkGray" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                </Grid>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                <TextBlock Text="{Binding CreationDateTime, Converter={StaticResource DateTimeConverter}}" />
 
-            </Border>
+                                <TextBlock Margin="5,0" Text="-" />
 
-        </ContentControl>
+                                <TextBlock Text="{Binding LimitDateTime, Converter={StaticResource DateTimeConverter}}" />
+                            </StackPanel>
+                        </DockPanel>
+
+                    </Border>
+
+                </ContentControl>
+
+            </Grid>
+
+        </Border>
 
     </DataTemplate>
 
