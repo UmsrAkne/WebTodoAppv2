@@ -81,14 +81,9 @@ namespace WebTodoAppv2.ViewModels
             group.EditMode = false;
         });
 
-        public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
+        public DelegateCommand<Todo> ShowDetailPageCommand => new DelegateCommand<Todo>((t) =>
         {
-            if (TopTodoLists.SelectionItem == null)
-            {
-                return;
-            }
-
-            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), _ => { });
+            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters() { { nameof(Todo), t } }, _ => { });
             ReloadCommand.Execute();
         });
 
