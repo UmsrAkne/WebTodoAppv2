@@ -118,8 +118,8 @@
             <ListView
                 Grid.Row="1"
                 ItemTemplate="{StaticResource GroupListViewDataTemplate}"
-                ItemsSource="{Binding TopTodoLists.Groups}"
-                SelectedItem="{Binding TopTodoLists.CurrentGroup}">
+                ItemsSource="{Binding BottomTodoLists.Groups}"
+                SelectedItem="{Binding BottomTodoLists.CurrentGroup}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
@@ -135,8 +135,8 @@
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding TopTodoLists.Todos}"
-            SelectedItem="{Binding TopTodoLists.SelectionItem}" />
+            ItemsSource="{Binding BottomTodoLists.Todos}"
+            SelectedItem="{Binding BottomTodoLists.SelectionItem}" />
 
         <StatusBar
             Grid.Row="3"

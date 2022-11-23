@@ -24,6 +24,8 @@ namespace WebTodoAppv2.ViewModels
         {
             todoDbContext = dbContext;
             TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+            BottomTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+
             this.dialogService = dialogService;
 
             ReloadCommand.Execute();
@@ -37,6 +39,8 @@ namespace WebTodoAppv2.ViewModels
 
         public TodoLists TopTodoLists { get; } = new ();
 
+        public TodoLists BottomTodoLists { get; } = new ();
+
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
@@ -44,6 +48,10 @@ namespace WebTodoAppv2.ViewModels
         {
             TopTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TopTodoLists.CurrentGroup));
             TopTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+
+            BottomTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(BottomTodoLists.CurrentGroup));
+            BottomTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+
             CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         });
 
