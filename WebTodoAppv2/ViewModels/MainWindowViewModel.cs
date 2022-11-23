@@ -20,10 +20,9 @@ namespace WebTodoAppv2.ViewModels
 
         private int completeTodoCount;
 
-        public MainWindowViewModel(TodoDbContext dbContext, TodoLists topTodoLists, IDialogService dialogService)
+        public MainWindowViewModel(TodoDbContext dbContext,  IDialogService dialogService)
         {
             todoDbContext = dbContext;
-            TopTodoLists = topTodoLists;
             TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
             this.dialogService = dialogService;
 
@@ -36,7 +35,7 @@ namespace WebTodoAppv2.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        public TodoLists TopTodoLists { get; private set; }
+        public TodoLists TopTodoLists { get; } = new ();
 
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
