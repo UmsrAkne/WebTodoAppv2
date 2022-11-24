@@ -87,9 +87,9 @@ namespace WebTodoAppv2.ViewModels
             ReloadCommand.Execute();
         });
 
-        public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
+        public DelegateCommand<Group> ShowTodoAdditionPageCommand => new DelegateCommand<Group>((group) =>
         {
-            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), _ => { });
+            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters() { { nameof(Group), group } }, _ => { });
             ReloadCommand.Execute();
         });
 
