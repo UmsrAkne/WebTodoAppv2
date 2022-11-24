@@ -34,7 +34,14 @@
         <KeyBinding
             Key="N"
             Command="{Binding ShowTodoAdditionPageCommand}"
+            CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="N"
+            Command="{Binding ShowTodoAdditionPageCommand}"
+            CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
+            Modifiers="Ctrl+Shift" />
 
     </Window.InputBindings>
 
@@ -47,6 +54,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -59,7 +67,15 @@
             <MenuItem Header="File" />
 
             <MenuItem Header="Todo">
-                <MenuItem Command="{Binding ShowTodoAdditionPageCommand}" Header="Todo を追加" />
+                <MenuItem
+                    Command="{Binding ShowTodoAdditionPageCommand}"
+                    CommandParameter="{Binding TopTodoLists.CurrentGroup}"
+                    Header="上のグループに Todo を追加" />
+
+                <MenuItem
+                    Command="{Binding ShowTodoAdditionPageCommand}"
+                    CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
+                    Header="下のグループに Todo を追加" />
             </MenuItem>
 
             <MenuItem Header="Group">
@@ -103,7 +119,16 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="0">
+        <GridSplitter
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Height="4"
+            HorizontalAlignment="Stretch"
+            Background="{StaticResource LightBgBrush}"
+            BorderThickness="0" />
+
+        <Grid Grid.Row="3" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition />
@@ -118,8 +143,8 @@
             <ListView
                 Grid.Row="1"
                 ItemTemplate="{StaticResource GroupListViewDataTemplate}"
-                ItemsSource="{Binding TopTodoLists.Groups}"
-                SelectedItem="{Binding TopTodoLists.CurrentGroup}">
+                ItemsSource="{Binding BottomTodoLists.Groups}"
+                SelectedItem="{Binding BottomTodoLists.CurrentGroup}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
@@ -131,15 +156,15 @@
 
         <ListView
             Name="TodoListViewBottom"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding TopTodoLists.Todos}"
-            SelectedItem="{Binding TopTodoLists.SelectionItem}" />
+            ItemsSource="{Binding BottomTodoLists.Todos}"
+            SelectedItem="{Binding BottomTodoLists.SelectionItem}" />
 
         <StatusBar
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="{StaticResource DarkBgBrush}">

@@ -19,19 +19,16 @@ namespace WebTodoAppv2.ViewModels
         private List<Group> groups;
         private Group currentGroup;
 
-        public DetailPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
+        public DetailPageViewModel(TodoDbContext todoDbContext)
         {
             this.todoDbContext = todoDbContext;
-            TodoLists = todoLists;
-            Todo = TodoLists.SelectionItem;
-            Reload();
         }
 
         public event Action<IDialogResult> RequestClose;
 
         public string Title => "Detail Page";
 
-        public TodoLists TodoLists { get; set; }
+        public TodoLists TodoLists { get; set; } = new ();
 
         public Todo Todo { get; set; }
 
@@ -126,10 +123,9 @@ namespace WebTodoAppv2.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            if (TodoLists.SelectionItem != null)
-            {
-                TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
-            }
+            Todo = parameters.GetValue<Todo>(nameof(Todo));
+            TodoLists.Operations = new ObservableCollection<ITimeTableItem>(todoDbContext.GetOperations(Todo));
+            Reload();
         }
 
         private void Reload()

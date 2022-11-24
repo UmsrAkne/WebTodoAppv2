@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -12,8 +13,8 @@ namespace WebTodoAppv2.ViewModels
     public class TodoAdditionPageViewModel : BindableBase, IDialogAware
     {
         private readonly TodoDbContext todoDbContext;
-        private string todoTitle;
-        private string detail;
+        private string todoTitle = string.Empty;
+        private string detail = string.Empty;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
         private Group currentGroup;
@@ -23,10 +24,9 @@ namespace WebTodoAppv2.ViewModels
 
         private bool createAsCompletedTodo;
 
-        public TodoAdditionPageViewModel(TodoDbContext todoDbContext, TodoLists todoLists)
+        public TodoAdditionPageViewModel(TodoDbContext todoDbContext)
         {
             this.todoDbContext = todoDbContext;
-            currentGroup = todoLists.CurrentGroup;
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -85,6 +85,7 @@ namespace WebTodoAppv2.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            currentGroup = parameters.GetValue<Group>(nameof(Group));
         }
     }
 }

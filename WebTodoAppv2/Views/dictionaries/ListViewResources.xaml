@@ -75,7 +75,7 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" />
+                            <i:InvokeCommandAction Command="{Binding DataContext.ShowDetailPageCommand, ElementName=Window}" CommandParameter="{Binding}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 

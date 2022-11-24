@@ -20,11 +20,12 @@ namespace WebTodoAppv2.ViewModels
 
         private int completeTodoCount;
 
-        public MainWindowViewModel(TodoDbContext dbContext, TodoLists topTodoLists, IDialogService dialogService)
+        public MainWindowViewModel(TodoDbContext dbContext,  IDialogService dialogService)
         {
             todoDbContext = dbContext;
-            TopTodoLists = topTodoLists;
             TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+            BottomTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+
             this.dialogService = dialogService;
 
             ReloadCommand.Execute();
@@ -36,7 +37,9 @@ namespace WebTodoAppv2.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        public TodoLists TopTodoLists { get; private set; }
+        public TodoLists TopTodoLists { get; } = new ();
+
+        public TodoLists BottomTodoLists { get; } = new ();
 
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
@@ -45,6 +48,10 @@ namespace WebTodoAppv2.ViewModels
         {
             TopTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TopTodoLists.CurrentGroup));
             TopTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+
+            BottomTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(BottomTodoLists.CurrentGroup));
+            BottomTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+
             CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         });
 
@@ -74,20 +81,15 @@ namespace WebTodoAppv2.ViewModels
             group.EditMode = false;
         });
 
-        public DelegateCommand ShowDetailPageCommand => new DelegateCommand(() =>
+        public DelegateCommand<Todo> ShowDetailPageCommand => new DelegateCommand<Todo>((t) =>
         {
-            if (TopTodoLists.SelectionItem == null)
-            {
-                return;
-            }
-
-            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters(), _ => { });
+            dialogService.ShowDialog(nameof(DetailPage), new DialogParameters() { { nameof(Todo), t } }, _ => { });
             ReloadCommand.Execute();
         });
 
-        public DelegateCommand ShowTodoAdditionPageCommand => new DelegateCommand(() =>
+        public DelegateCommand<Group> ShowTodoAdditionPageCommand => new DelegateCommand<Group>((group) =>
         {
-            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters(), _ => { });
+            dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters() { { nameof(Group), group } }, _ => { });
             ReloadCommand.Execute();
         });
 

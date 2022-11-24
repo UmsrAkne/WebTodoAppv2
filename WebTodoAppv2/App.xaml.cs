@@ -32,7 +32,6 @@ namespace WebTodoAppv2
 
             // 前述の RegisterType を削除しても Singleton に登録は可能。
             container.RegisterSingleton(typeof(TodoDbContext));
-            container.RegisterSingleton(typeof(TodoLists));
 
             var dbContext = container.Resolve<TodoDbContext>();
 
