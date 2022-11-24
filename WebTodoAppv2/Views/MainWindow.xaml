@@ -34,7 +34,14 @@
         <KeyBinding
             Key="N"
             Command="{Binding ShowTodoAdditionPageCommand}"
+            CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="N"
+            Command="{Binding ShowTodoAdditionPageCommand}"
+            CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
+            Modifiers="Ctrl+Shift" />
 
     </Window.InputBindings>
 
@@ -59,7 +66,15 @@
             <MenuItem Header="File" />
 
             <MenuItem Header="Todo">
-                <MenuItem Command="{Binding ShowTodoAdditionPageCommand}" Header="Todo を追加" />
+                <MenuItem
+                    Command="{Binding ShowTodoAdditionPageCommand}"
+                    CommandParameter="{Binding TopTodoLists.CurrentGroup}"
+                    Header="上のグループに Todo を追加" />
+
+                <MenuItem
+                    Command="{Binding ShowTodoAdditionPageCommand}"
+                    CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
+                    Header="下のグループに Todo を追加" />
             </MenuItem>
 
             <MenuItem Header="Group">
