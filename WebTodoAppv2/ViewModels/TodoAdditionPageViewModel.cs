@@ -13,8 +13,8 @@ namespace WebTodoAppv2.ViewModels
     public class TodoAdditionPageViewModel : BindableBase, IDialogAware
     {
         private readonly TodoDbContext todoDbContext;
-        private string todoTitle;
-        private string detail;
+        private string todoTitle = string.Empty;
+        private string detail = string.Empty;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
         private Group currentGroup;
