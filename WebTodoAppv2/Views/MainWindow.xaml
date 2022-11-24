@@ -54,6 +54,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -118,7 +119,16 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="0">
+        <GridSplitter
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Height="4"
+            HorizontalAlignment="Stretch"
+            Background="{StaticResource LightBgBrush}"
+            BorderThickness="0" />
+
+        <Grid Grid.Row="3" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition />
@@ -146,7 +156,7 @@
 
         <ListView
             Name="TodoListViewBottom"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ListViewDataTemplate}"
@@ -154,7 +164,7 @@
             SelectedItem="{Binding BottomTodoLists.SelectionItem}" />
 
         <StatusBar
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="{StaticResource DarkBgBrush}">
