@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using MemoSoftv2.Views;
 using Prism.Ioc;
 using Prism.Unity;
 using Unity;
@@ -24,6 +25,7 @@ namespace WebTodoAppv2
         {
             containerRegistry.RegisterDialog<DetailPage, DetailPageViewModel>();
             containerRegistry.RegisterDialog<TodoAdditionPage, TodoAdditionPageViewModel>();
+            containerRegistry.RegisterDialog<ConnectionPage, ConnectionPageViewModel>();
 
             IUnityContainer container = containerRegistry.GetContainer();
 

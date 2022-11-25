@@ -21,11 +21,11 @@ namespace WebTodoAppv2.ViewModels
         {
             // this.dbContext = dbContext;
 
-            // DatabaseName = Properties.Settings.Default.DatabaseName;
-            // Port = Properties.Settings.Default.PortNumber;
-            // Host = Properties.Settings.Default.Host;
-            // Password = Properties.Settings.Default.Password;
-            // UserName = Properties.Settings.Default.UserName;
+            DatabaseName = Properties.Settings.Default.DatabaseName;
+            Port = Properties.Settings.Default.PortNumber;
+            Host = Properties.Settings.Default.Host;
+            Password = Properties.Settings.Default.Password;
+            UserName = Properties.Settings.Default.UserName;
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -44,12 +44,12 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand CloseCommand => new DelegateCommand(() =>
         {
-            // Properties.Settings.Default.DatabaseName = DatabaseName;
-            // Properties.Settings.Default.PortNumber = Port;
-            // Properties.Settings.Default.Host = Host;
-            // Properties.Settings.Default.Password = Password;
-            // Properties.Settings.Default.UserName = UserName;
-            // Properties.Settings.Default.Save();
+            Properties.Settings.Default.DatabaseName = DatabaseName;
+            Properties.Settings.Default.PortNumber = Port;
+            Properties.Settings.Default.Host = Host;
+            Properties.Settings.Default.Password = Password;
+            Properties.Settings.Default.UserName = UserName;
+            Properties.Settings.Default.Save();
 
             NpgsqlConnectionStringBuilder connectionStringBuilder = new ()
             {
