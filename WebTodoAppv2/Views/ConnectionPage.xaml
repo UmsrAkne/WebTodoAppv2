@@ -1,0 +1,68 @@
+<Page
+    x:Class="MemoSoftv2.Views.ConnectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WebTodoAppv2.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ConnectionPage"
+    d:DataContext="{d:DesignInstance local:ConnectionPageViewModel}"
+    mc:Ignorable="d">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0,1" />
+                </Style>
+
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,1" />
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="150" Text="Database Name" />
+                <TextBox Width="250" Text="{Binding DatabaseName}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="150" Text="Host" />
+                <TextBox Width="250" Text="{Binding Host}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="150" Text="User name" />
+                <TextBox Width="250" Text="{Binding UserName}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="150" Text="Password" />
+                <TextBox Width="250" Text="{Binding Password}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="150" Text="Port" />
+                <TextBox Width="250" Text="{Binding Port}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="10"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+
+            <Button
+                Width="50"
+                Height="25"
+                Command="{Binding CloseCommand}"
+                Content="決定" />
+        </StackPanel>
+
+    </Grid>
+</Page>
