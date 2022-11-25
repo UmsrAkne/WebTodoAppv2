@@ -105,7 +105,7 @@ namespace WebTodoAppv2.ViewModels
                 todoDbContext.AddComment(new Comment()
                 {
                     Text = CommentText,
-                    TodoId = TodoLists.SelectionItem.Id,
+                    TodoId = Todo.Id,
                     DateTime = DateTime.Now,
                 });
 
