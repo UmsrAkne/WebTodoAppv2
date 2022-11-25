@@ -196,20 +196,13 @@
 
         </StackPanel>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="2">
 
-            <TextBlock
-                Grid.Column="0"
-                Margin="5,0"
-                Text="Comment : " />
+            <TextBlock Margin="5,0" Text="Comment ( Ctrl + Enter で投稿 ) " />
 
             <TextBox
-                Grid.Column="1"
-                Margin="5,0"
+                Margin="5,8"
+                AcceptsReturn="True"
                 Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}">
 
                 <TextBox.InputBindings>
@@ -220,7 +213,7 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-        </Grid>
+        </StackPanel>
 
         <ListView
             Grid.Row="3"
