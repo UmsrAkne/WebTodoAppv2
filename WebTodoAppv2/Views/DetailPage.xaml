@@ -102,19 +102,10 @@
 
             </StackPanel>
 
-            <Grid Margin="0,4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    Grid.Column="0"
-                    Margin="0,0,8,0"
-                    Text="詳細 :" />
-                <TextBox Grid.Column="1" Text="{Binding Todo.Detail, UpdateSourceTrigger=PropertyChanged}" />
-
-            </Grid>
+            <DockPanel Margin="0,10">
+                <TextBlock Margin="0,0,8,0" Text="詳細 :" />
+                <TextBox Text="{Binding Todo.Detail, UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -197,6 +188,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
+
+            <Border
+                Height="1"
+                Margin="5,0"
+                Background="{StaticResource LightBgBrush}" />
 
             <TextBlock Margin="5,0" Text="Comment ( Ctrl + Enter で投稿 ) " />
 
