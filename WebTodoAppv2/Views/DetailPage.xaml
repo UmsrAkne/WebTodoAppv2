@@ -87,10 +87,15 @@
                     Background="Gray" />
 
                 <TextBlock Margin="0,0,6,0" Text="グループ : " />
-                <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding CurrentGroup}">
+
+                <ComboBox
+                    HorizontalContentAlignment="Stretch"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Groups}"
+                    SelectedItem="{Binding CurrentGroup}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:Group}">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Foreground="Black" Text="{Binding Name}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
