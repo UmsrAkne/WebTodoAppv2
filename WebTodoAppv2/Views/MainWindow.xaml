@@ -66,7 +66,7 @@
             Background="{StaticResource DarkBgBrush}">
             <MenuItem Header="File" />
 
-            <MenuItem Header="Todo">
+            <MenuItem Header="Todo" IsEnabled="{Binding DatabaseConnection}">
                 <MenuItem
                     Command="{Binding ShowTodoAdditionPageCommand}"
                     CommandParameter="{Binding TopTodoLists.CurrentGroup}"
@@ -78,7 +78,7 @@
                     Header="下のグループに Todo を追加" />
             </MenuItem>
 
-            <MenuItem Header="Group">
+            <MenuItem Header="Group" IsEnabled="{Binding DatabaseConnection}">
                 <MenuItem Command="{Binding AddGroupCommand}" Header="グループを追加" />
             </MenuItem>
         </Menu>
