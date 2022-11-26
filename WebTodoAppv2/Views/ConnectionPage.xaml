@@ -49,6 +49,36 @@
                 <TextBlock Width="150" Text="Port" />
                 <TextBox Width="250" Text="{Binding Port}" />
             </StackPanel>
+
+            <Border
+                Height="1"
+                Margin="0,10"
+                Background="Black" />
+
+            <DockPanel>
+                <Button
+                    Width="100"
+                    Background="Gray"
+                    Command="{Binding ConnectionCommand}"
+                    Content="接続確認" />
+
+                <TextBlock Width="250" HorizontalAlignment="Right">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Connection}" Value="True">
+                                    <Setter Property="Text" Value="接続成功" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Connection}" Value="False">
+                                    <Setter Property="Text" Value="接続失敗" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </DockPanel>
+
         </StackPanel>
 
         <StackPanel
@@ -60,6 +90,7 @@
             <Button
                 Width="50"
                 Height="25"
+                Background="Gray"
                 Command="{Binding CloseCommand}"
                 Content="決定" />
         </StackPanel>

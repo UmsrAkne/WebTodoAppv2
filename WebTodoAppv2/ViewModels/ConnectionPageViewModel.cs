@@ -16,11 +16,10 @@ namespace WebTodoAppv2.ViewModels
         private string host;
         private string password;
         private string userName;
+        private bool connection;
 
         public ConnectionPageViewModel()
         {
-            // this.dbContext = dbContext;
-
             DatabaseName = Properties.Settings.Default.DatabaseName;
             Port = Properties.Settings.Default.PortNumber;
             Host = Properties.Settings.Default.Host;
@@ -42,6 +41,8 @@ namespace WebTodoAppv2.ViewModels
 
         public string UserName { get => userName; set => SetProperty(ref userName, value); }
 
+        public bool Connection { get => connection; set => SetProperty(ref connection, value); }
+
         public DelegateCommand CloseCommand => new DelegateCommand(() =>
         {
             Properties.Settings.Default.DatabaseName = DatabaseName;
@@ -51,17 +52,23 @@ namespace WebTodoAppv2.ViewModels
             Properties.Settings.Default.UserName = UserName;
             Properties.Settings.Default.Save();
 
-            NpgsqlConnectionStringBuilder connectionStringBuilder = new ()
-            {
-                Database = DatabaseName,
-                Port = Port,
-                Host = Host,
-                Password = Password,
-                Username = UserName,
-            };
-
-            // dbContext.ConnectionStringBuilder = connectionStringBuilder;
             RequestClose?.Invoke(default);
+        });
+
+        public DelegateCommand ConnectionCommand => new DelegateCommand(() =>
+        {
+            var context = new TodoDbContext();
+
+            try
+            {
+                context.Database.EnsureCreated();
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
+
+            Connection = context.Database.CanConnect();
         });
 
         public bool CanCloseDialog()
