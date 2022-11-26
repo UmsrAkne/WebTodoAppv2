@@ -27,15 +27,7 @@ namespace WebTodoAppv2
             containerRegistry.RegisterDialog<TodoAdditionPage, TodoAdditionPageViewModel>();
             containerRegistry.RegisterDialog<ConnectionPage, ConnectionPageViewModel>();
 
-            IUnityContainer container = containerRegistry.GetContainer();
-
-            // DI する対象が具象クラスである場合は RegisterType の必要はないかも？　(未検証)
-            container.RegisterType(typeof(TodoDbContext));
-
-            // 前述の RegisterType を削除しても Singleton に登録は可能。
-            container.RegisterSingleton(typeof(TodoDbContext));
-
-            var dbContext = container.Resolve<TodoDbContext>();
+            var dbContext = new TodoDbContext();
 
             try
             {
