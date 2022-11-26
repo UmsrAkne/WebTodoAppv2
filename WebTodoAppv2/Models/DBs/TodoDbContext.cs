@@ -102,11 +102,11 @@ namespace WebTodoAppv2.Models.DBs
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder
             {
-                Port = 5433,
-                Username = "postgres",
-                Password = "passwordd",
-                Host = "localhost",
-                Database = "testdb",
+                Port = Properties.Settings.Default.PortNumber,
+                Username = Properties.Settings.Default.UserName,
+                Password = Properties.Settings.Default.Password,
+                Host = Properties.Settings.Default.Host,
+                Database = Properties.Settings.Default.DatabaseName,
             };
 
             optionsBuilder.UseNpgsql(builder.ToString());
