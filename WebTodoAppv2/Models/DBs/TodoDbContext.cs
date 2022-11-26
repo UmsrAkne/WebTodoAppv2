@@ -55,6 +55,11 @@ namespace WebTodoAppv2.Models.DBs
         /// </summary>
         public void AddDefaultGroup()
         {
+            if (!Database.CanConnect())
+            {
+                return;
+            }
+
             if (!Groups.Any())
             {
                 Groups.Add(new Group() { Name = "Default Group" });
@@ -99,7 +104,7 @@ namespace WebTodoAppv2.Models.DBs
             {
                 Port = 5433,
                 Username = "postgres",
-                Password = "password",
+                Password = "passwordd",
                 Host = "localhost",
                 Database = "testdb",
             };

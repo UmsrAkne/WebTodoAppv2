@@ -15,20 +15,33 @@ namespace WebTodoAppv2.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private readonly IDialogService dialogService;
-        private readonly TodoDbContext todoDbContext;
+        private TodoDbContext todoDbContext = new ();
+        private bool databaseConnection;
         private string title = "Web todo app v2";
 
         private int completeTodoCount;
 
-        public MainWindowViewModel(TodoDbContext dbContext,  IDialogService dialogService)
+        public MainWindowViewModel(IDialogService dialogService)
         {
-            todoDbContext = dbContext;
-            TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
-            BottomTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+            try
+            {
+                todoDbContext.Database.EnsureCreated();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            DatabaseConnection = todoDbContext.Database.CanConnect();
+
+            if (DatabaseConnection)
+            {
+                TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+                BottomTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+                ReloadCommand.Execute();
+            }
 
             this.dialogService = dialogService;
-
-            ReloadCommand.Execute();
         }
 
         public string Title
@@ -36,6 +49,8 @@ namespace WebTodoAppv2.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+
+        public bool DatabaseConnection { get => databaseConnection; private set => SetProperty(ref databaseConnection, value); }
 
         public TodoLists TopTodoLists { get; } = new ();
 
