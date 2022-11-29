@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MemoSoftv2.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -36,8 +37,8 @@ namespace WebTodoAppv2.ViewModels
 
             if (DatabaseConnection)
             {
-                TopTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
-                BottomTodoLists.CurrentGroup = todoDbContext.GetGroups().FirstOrDefault();
+                TopTodoLists.CurrentGroup ??= todoDbContext.GetGroups().FirstOrDefault();
+                BottomTodoLists.CurrentGroup ??= todoDbContext.GetGroups().FirstOrDefault();
                 ReloadCommand.Execute();
             }
 
@@ -61,11 +62,18 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand ReloadCommand => new DelegateCommand(() =>
         {
-            TopTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(TopTodoLists.CurrentGroup));
-            TopTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+            using var context = TodoDbContext;
 
-            BottomTodoLists.Todos = new ObservableCollection<Todo>(todoDbContext.GetTodos(BottomTodoLists.CurrentGroup));
-            BottomTodoLists.Groups = new ObservableCollection<Group>(todoDbContext.GetGroups());
+            if (!DatabaseConnection)
+            {
+                return;
+            }
+
+            TopTodoLists.Todos = new ObservableCollection<Todo>(context.GetTodos(TopTodoLists.CurrentGroup));
+            TopTodoLists.Groups = new ObservableCollection<Group>(context.GetGroups());
+
+            BottomTodoLists.Todos = new ObservableCollection<Todo>(context.GetTodos(BottomTodoLists.CurrentGroup));
+            BottomTodoLists.Groups = new ObservableCollection<Group>(context.GetGroups());
 
             CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         });
@@ -107,6 +115,37 @@ namespace WebTodoAppv2.ViewModels
             dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters() { { nameof(Group), group } }, _ => { });
             ReloadCommand.Execute();
         });
+
+        public DelegateCommand ShowConnectionPageCommand => new DelegateCommand(() =>
+        {
+            dialogService.ShowDialog(nameof(ConnectionPage), new DialogParameters(), _ => { });
+
+            using var context = TodoDbContext;
+            TopTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
+            BottomTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
+
+            ReloadCommand.Execute();
+        });
+
+        private TodoDbContext TodoDbContext
+        {
+            get
+            {
+                var context = new TodoDbContext();
+                try
+                {
+                    context.Database.EnsureCreated();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+                DatabaseConnection = context.Database.CanConnect();
+
+                return context;
+            }
+        }
 
         public void AddTodo(List<TodoTemplate> templates)
         {

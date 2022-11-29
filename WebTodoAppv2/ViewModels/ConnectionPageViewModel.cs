@@ -69,6 +69,7 @@ namespace WebTodoAppv2.ViewModels
             }
 
             Connection = context.Database.CanConnect();
+            context.Dispose();
         });
 
         public bool CanCloseDialog()

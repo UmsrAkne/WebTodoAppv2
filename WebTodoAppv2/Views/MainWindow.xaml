@@ -81,6 +81,10 @@
             <MenuItem Header="Group" IsEnabled="{Binding DatabaseConnection}">
                 <MenuItem Command="{Binding AddGroupCommand}" Header="グループを追加" />
             </MenuItem>
+
+            <MenuItem Header="Database">
+                <MenuItem Command="{Binding ShowConnectionPageCommand}" Header="接続設定" />
+            </MenuItem>
         </Menu>
 
         <ListView
