@@ -75,7 +75,7 @@ namespace WebTodoAppv2.Models.DBs
 
         public List<Todo> GetTodos(Group group)
         {
-            return GetTodos().Where(t => group.Id == t.GroupId).ToList();
+            return group == null ? new List<Todo>() : GetTodos().Where(t => group.Id == t.GroupId).ToList();
         }
 
         /// <summary>
