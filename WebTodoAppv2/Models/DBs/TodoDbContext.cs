@@ -55,6 +55,11 @@ namespace WebTodoAppv2.Models.DBs
         /// </summary>
         public void AddDefaultGroup()
         {
+            if (!Database.CanConnect())
+            {
+                return;
+            }
+
             if (!Groups.Any())
             {
                 Groups.Add(new Group() { Name = "Default Group" });
@@ -70,7 +75,7 @@ namespace WebTodoAppv2.Models.DBs
 
         public List<Todo> GetTodos(Group group)
         {
-            return GetTodos().Where(t => group.Id == t.GroupId).ToList();
+            return group == null ? new List<Todo>() : GetTodos().Where(t => group.Id == t.GroupId).ToList();
         }
 
         /// <summary>
@@ -97,11 +102,11 @@ namespace WebTodoAppv2.Models.DBs
         {
             NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder
             {
-                Port = 5433,
-                Username = "postgres",
-                Password = "password",
-                Host = "localhost",
-                Database = "testdb",
+                Port = Properties.Settings.Default.PortNumber,
+                Username = Properties.Settings.Default.UserName,
+                Password = Properties.Settings.Default.Password,
+                Host = Properties.Settings.Default.Host,
+                Database = Properties.Settings.Default.DatabaseName,
             };
 
             optionsBuilder.UseNpgsql(builder.ToString());
