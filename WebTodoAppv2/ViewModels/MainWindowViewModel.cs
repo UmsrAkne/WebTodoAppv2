@@ -16,7 +16,6 @@ namespace WebTodoAppv2.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private readonly IDialogService dialogService;
-        private TodoDbContext todoDbContext = new ();
         private bool databaseConnection;
         private string title = "Web todo app v2";
 
@@ -24,21 +23,23 @@ namespace WebTodoAppv2.ViewModels
 
         public MainWindowViewModel(IDialogService dialogService)
         {
+            using var context = TodoDbContext;
+
             try
             {
-                todoDbContext.Database.EnsureCreated();
+                context.Database.EnsureCreated();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
 
-            DatabaseConnection = todoDbContext.Database.CanConnect();
+            DatabaseConnection = context.Database.CanConnect();
 
             if (DatabaseConnection)
             {
-                TopTodoLists.CurrentGroup ??= todoDbContext.GetGroups().FirstOrDefault();
-                BottomTodoLists.CurrentGroup ??= todoDbContext.GetGroups().FirstOrDefault();
+                TopTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
+                BottomTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
                 ReloadCommand.Execute();
             }
 
@@ -80,13 +81,15 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {
-            todoDbContext.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
+            using var context = TodoDbContext;
+            context.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
             ReloadCommand.Execute();
         });
 
         public DelegateCommand AddGroupCommand => new DelegateCommand(() =>
         {
-            todoDbContext.AddGroup(new Group() { Name = "New Group" });
+            using var context = TodoDbContext;
+            context.AddGroup(new Group() { Name = "New Group" });
             var currentGroup = TopTodoLists.CurrentGroup;
             ReloadCommand.Execute();
 
@@ -100,7 +103,8 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand<Group> ConfirmGroupNameCommand => new DelegateCommand<Group>((group) =>
         {
-            todoDbContext.SaveChanges();
+            using var context = TodoDbContext;
+            context.SaveChanges();
             group.EditMode = false;
         });
 
@@ -160,7 +164,8 @@ namespace WebTodoAppv2.ViewModels
                    GroupName = t.GroupName,
                };
 
-               todoDbContext.AddTodo(todo);
+               using var context = TodoDbContext;
+               context.AddTodo(todo);
            });
 
            ReloadCommand.Execute();
