@@ -1,8 +1,8 @@
-using System.Windows.Controls;
-
-namespace MemoSoftv2.Views
+namespace WebTodoAppv2.Views
 {
-    public partial class ConnectionPage : Page
+#pragma warning disable SA1601
+    public partial class ConnectionPage
+#pragma warning restore SA1601
     {
         public ConnectionPage()
         {

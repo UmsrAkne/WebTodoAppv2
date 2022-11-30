@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
