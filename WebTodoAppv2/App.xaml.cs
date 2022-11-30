@@ -1,10 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
-using MemoSoftv2.Views;
 using Prism.Ioc;
-using Prism.Unity;
-using Unity;
-using WebTodoAppv2.Models;
 using WebTodoAppv2.Models.DBs;
 using WebTodoAppv2.ViewModels;
 using WebTodoAppv2.Views;

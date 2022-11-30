@@ -1,5 +1,4 @@
 using System;
-using Npgsql;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -10,7 +9,6 @@ namespace WebTodoAppv2.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class ConnectionPageViewModel : BindableBase, IDialogAware
     {
-        private readonly TodoDbContext dbContext;
         private int port;
         private string databaseName;
         private string host;
@@ -65,7 +63,7 @@ namespace WebTodoAppv2.ViewModels
             }
             catch (Exception e)
             {
-                // ignored
+                Console.WriteLine(e);
             }
 
             Connection = context.Database.CanConnect();
