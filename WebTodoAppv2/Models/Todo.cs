@@ -43,6 +43,12 @@ namespace WebTodoAppv2.Models
         [NotMapped]
         public string GroupName { get; init; } = string.Empty;
 
+        /// <summary>
+        /// 入力した Operation.Kind に合わせて、WorkingState を更新します。
+        /// </summary>
+        /// <param name="operation">適用する Operation を入力します。Operation.Kind のみが使用されます。</param>
+        /// <exception cref="ArgumentOutOfRangeException">operation.Kind が
+        /// Start, Pause, Resume, Complete, SwitchToIncomplete 以外だった場合にスロー</exception>
         public void ApplyOperation(Operation operation)
         {
             WorkingState = operation.Kind switch
