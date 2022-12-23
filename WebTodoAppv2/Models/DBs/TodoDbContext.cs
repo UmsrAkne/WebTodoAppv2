@@ -133,29 +133,7 @@ namespace WebTodoAppv2.Models.DBs
 
                 var lastOperationKind = tg.MaxBy(t => t.operation.DateTime) !.operation.Kind;
                 var currentTodo = tg.FirstOrDefault()?.todo;
-
-                if (currentTodo == null)
-                {
-                    continue;
-                }
-
-                switch (lastOperationKind)
-                {
-                    case OperationKind.Complete:
-                        currentTodo.WorkingState = WorkingState.Completed;
-                        continue;
-                    case OperationKind.SwitchToIncomplete:
-                        continue;
-                    case OperationKind.Pause:
-                        currentTodo.WorkingState = WorkingState.Pausing;
-                        continue;
-                    case OperationKind.Start:
-                    case OperationKind.Resume:
-                        currentTodo.WorkingState = WorkingState.Working;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                currentTodo?.ApplyOperation(new Operation() { Kind = lastOperationKind });
             }
 
             return todos;
