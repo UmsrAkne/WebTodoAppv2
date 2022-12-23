@@ -149,11 +149,11 @@ namespace WebTodoAppv2.ViewModels
 
             operation.TodoId = t.Id;
             operation.DateTime = DateTime.Now;
-            
+            t.ApplyOperation(operation);
+
             using var context = TodoDbContext;
             context.AddOperation(operation);
         });
-
 
         private TodoDbContext TodoDbContext
         {

@@ -42,5 +42,18 @@ namespace WebTodoAppv2.Models
 
         [NotMapped]
         public string GroupName { get; init; } = string.Empty;
+
+        public void ApplyOperation(Operation operation)
+        {
+            WorkingState = operation.Kind switch
+            {
+                OperationKind.Start => WorkingState.Working,
+                OperationKind.Pause => WorkingState.Pausing,
+                OperationKind.Resume => WorkingState.Working,
+                OperationKind.Complete => WorkingState.Completed,
+                OperationKind.SwitchToIncomplete => WorkingState.InitialState,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
     }
 }
