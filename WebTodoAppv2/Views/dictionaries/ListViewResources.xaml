@@ -74,7 +74,11 @@
                         </CheckBox.Style>
                     </CheckBox>
 
-                    <Button Width="60" Margin="8,0">
+                    <Button
+                        Width="60"
+                        Margin="8,0"
+                        Command="{Binding DataContext.ChangeTodoStatusCommand, ElementName=Window}"
+                        CommandParameter="{Binding}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource RadiusButtonStyle}" TargetType="Button">
                                 <Style.Triggers>
