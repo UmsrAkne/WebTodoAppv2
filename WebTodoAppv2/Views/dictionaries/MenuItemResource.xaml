@@ -131,6 +131,7 @@
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <Path
                     x:Name="GlyphPanel"
+                    Grid.Column="1"
                     Margin="3"
                     VerticalAlignment="Center"
                     Data="{StaticResource Checkmark}"
@@ -194,6 +195,7 @@
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <Path
                     x:Name="GlyphPanel"
+                    Grid.Column="1"
                     Margin="3"
                     VerticalAlignment="Center"
                     Data="{StaticResource Checkmark}"
@@ -208,6 +210,7 @@
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <Popup
                     x:Name="PART_Popup"
+                    Grid.Column="1"
                     AllowsTransparency="true"
                     Focusable="false"
                     IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
@@ -307,6 +310,7 @@
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <Border
                     x:Name="GlyphPanel"
+                    Grid.Column="0"
                     Width="22"
                     Height="22"
                     Margin="-1,0,0,0"
@@ -401,6 +405,7 @@
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <Border
                     x:Name="GlyphPanel"
+                    Grid.Column="0"
                     Width="22"
                     Height="22"
                     Margin="-1,0,0,0"
@@ -442,6 +447,7 @@
                     Fill="{StaticResource Menu.Static.Foreground}" />
                 <Popup
                     x:Name="PART_Popup"
+                    Grid.Column="0"
                     AllowsTransparency="true"
                     Focusable="false"
                     HorizontalOffset="-2"
