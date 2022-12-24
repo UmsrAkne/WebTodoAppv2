@@ -39,7 +39,7 @@ namespace WebTodoAppv2.ViewModels
             {
                 TopTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
                 BottomTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
-                ReloadCommand.Execute();
+                Reload();
             }
 
             this.dialogService = dialogService;
@@ -60,29 +60,11 @@ namespace WebTodoAppv2.ViewModels
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
-        public DelegateCommand ReloadCommand => new DelegateCommand(() =>
-        {
-            using var context = TodoDbContext;
-
-            if (!DatabaseConnection)
-            {
-                return;
-            }
-
-            TopTodoLists.Todos = new ObservableCollection<Todo>(context.GetTodos(TopTodoLists.CurrentGroup));
-            TopTodoLists.Groups = new ObservableCollection<Group>(context.GetGroups());
-
-            BottomTodoLists.Todos = new ObservableCollection<Todo>(context.GetTodos(BottomTodoLists.CurrentGroup));
-            BottomTodoLists.Groups = new ObservableCollection<Group>(context.GetGroups());
-
-            CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
-        });
-
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {
             using var context = TodoDbContext;
             context.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
-            ReloadCommand.Execute();
+            Reload();
         });
 
         public DelegateCommand AddGroupCommand => new DelegateCommand(() =>
@@ -90,7 +72,7 @@ namespace WebTodoAppv2.ViewModels
             using var context = TodoDbContext;
             context.AddGroup(new Group() { Name = "New Group" });
             var currentGroup = TopTodoLists.CurrentGroup;
-            ReloadCommand.Execute();
+            Reload();
 
             TopTodoLists.CurrentGroup = currentGroup;
         });
@@ -110,13 +92,13 @@ namespace WebTodoAppv2.ViewModels
         public DelegateCommand<Todo> ShowDetailPageCommand => new DelegateCommand<Todo>((t) =>
         {
             dialogService.ShowDialog(nameof(DetailPage), new DialogParameters() { { nameof(Todo), t } }, _ => { });
-            ReloadCommand.Execute();
+            Reload();
         });
 
         public DelegateCommand<Group> ShowTodoAdditionPageCommand => new DelegateCommand<Group>((group) =>
         {
             dialogService.ShowDialog(nameof(TodoAdditionPage), new DialogParameters() { { nameof(Group), group } }, _ => { });
-            ReloadCommand.Execute();
+            Reload();
         });
 
         public DelegateCommand ShowConnectionPageCommand => new DelegateCommand(() =>
@@ -127,7 +109,7 @@ namespace WebTodoAppv2.ViewModels
             TopTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
             BottomTodoLists.CurrentGroup ??= context.GetGroups().FirstOrDefault();
 
-            ReloadCommand.Execute();
+            Reload();
         });
 
         public DelegateCommand<Todo> ChangeTodoStatusCommand => new DelegateCommand<Todo>(t =>
@@ -191,7 +173,14 @@ namespace WebTodoAppv2.ViewModels
                context.AddTodo(todo);
            });
 
-           ReloadCommand.Execute();
+           Reload();
+        }
+
+        private void Reload()
+        {
+            TopTodoLists.Reload();
+            BottomTodoLists.Reload();
+            CompleteTodoCount = TopTodoLists.Todos.Count(t => t.WorkingState == WorkingState.Completed);
         }
     }
 }
