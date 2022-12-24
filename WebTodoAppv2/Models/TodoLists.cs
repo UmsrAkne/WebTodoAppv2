@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Prism.Mvvm;
 using WebTodoAppv2.Models.DBs;
 
@@ -54,6 +55,19 @@ namespace WebTodoAppv2.Models
 
                 return context;
             }
+        }
+
+        public void Reload()
+        {
+            var context = TodoDbContext;
+            if (!context.Database.CanConnect())
+            {
+                return;
+            }
+
+            Groups = new ObservableCollection<Group>(context.GetGroups());
+            CurrentGroup ??= Groups.FirstOrDefault();
+            Todos = new ObservableCollection<Todo>(context.GetTodos(CurrentGroup));
         }
     }
 }
