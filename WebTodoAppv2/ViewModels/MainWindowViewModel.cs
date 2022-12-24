@@ -132,20 +132,19 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand<Todo> ChangeTodoStatusCommand => new DelegateCommand<Todo>(t =>
         {
-            if (t.WorkingState == WorkingState.Completed)
-            {
-                return;
-            }
-
             var operation = t.WorkingState switch
                 {
                     WorkingState.InitialState => new Operation() { Kind = OperationKind.Start },
                     WorkingState.Pausing => new Operation() { Kind = OperationKind.Resume },
                     WorkingState.Working => new Operation() { Kind = OperationKind.Pause },
-                    _ => throw new ArgumentOutOfRangeException()
+                    WorkingState.Completed => null,
+                    _ => null
                 };
-            // ArgumentException とかを投げるとプロパティで発生させることができない例外との指摘がでる
-            // プロパティで発生させられない例外ってことだけど、例外は投げるなってこと？
+
+            if (operation == null)
+            {
+                return;
+            }
 
             operation.TodoId = t.Id;
             operation.DateTime = DateTime.Now;
