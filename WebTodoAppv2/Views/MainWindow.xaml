@@ -113,13 +113,7 @@
                 Grid.Row="1"
                 ItemTemplate="{StaticResource GroupListViewDataTemplate}"
                 ItemsSource="{Binding TopTodoLists.Groups}"
-                SelectedItem="{Binding TopTodoLists.CurrentGroup}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListView>
+                SelectedItem="{Binding TopTodoLists.CurrentGroup}" />
 
         </Grid>
 
@@ -148,13 +142,7 @@
                 Grid.Row="1"
                 ItemTemplate="{StaticResource GroupListViewDataTemplate}"
                 ItemsSource="{Binding BottomTodoLists.Groups}"
-                SelectedItem="{Binding BottomTodoLists.CurrentGroup}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding ReloadCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListView>
+                SelectedItem="{Binding BottomTodoLists.CurrentGroup}" />
 
         </Grid>
 
