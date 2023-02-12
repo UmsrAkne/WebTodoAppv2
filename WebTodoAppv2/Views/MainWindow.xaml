@@ -37,23 +37,15 @@
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
 
-        <KeyBinding
-            Key="N"
-            Command="{Binding ShowTodoAdditionPageCommand}"
-            CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
-            Modifiers="Ctrl+Shift" />
-
     </Window.InputBindings>
 
-    <Grid>
+    <Grid Background="{StaticResource DarkBgBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
             <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
@@ -71,11 +63,6 @@
                     Command="{Binding ShowTodoAdditionPageCommand}"
                     CommandParameter="{Binding TopTodoLists.CurrentGroup}"
                     Header="上のグループに Todo を追加" />
-
-                <MenuItem
-                    Command="{Binding ShowTodoAdditionPageCommand}"
-                    CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
-                    Header="下のグループに Todo を追加" />
             </MenuItem>
 
             <MenuItem Header="Group" IsEnabled="{Binding DatabaseConnection}">
@@ -117,63 +104,112 @@
 
         </Grid>
 
-        <GridSplitter
+        <StackPanel
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Height="4"
-            HorizontalAlignment="Stretch"
-            Background="{StaticResource LightBgBrush}"
-            BorderThickness="0" />
+            Grid.ColumnSpan="2">
 
-        <Grid Grid.Row="3" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                    <Setter Property="Padding" Value="10,0" />
+                    <Setter Property="Width" Value="80" />
+                </Style>
+            </StackPanel.Resources>
 
-            <TextBlock
-                Grid.Row="0"
-                Padding="5,4"
-                Background="{StaticResource DarkBgBrush}"
-                Text="Groups" />
+            <StatusBar Background="{StaticResource DarkBgBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Width="auto"
+                        Margin="4,0"
+                        Text="表示中のTodo :" />
 
-            <ListView
-                Grid.Row="1"
-                ItemTemplate="{StaticResource GroupListViewDataTemplate}"
-                ItemsSource="{Binding BottomTodoLists.Groups}"
-                SelectedItem="{Binding BottomTodoLists.CurrentGroup}" />
+                    <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
 
-        </Grid>
+                    <Border
+                        Width="1"
+                        Margin="5,0"
+                        Background="Gray" />
 
-        <ListView
-            Name="TodoListViewBottom"
-            Grid.Row="3"
-            Grid.Column="1"
-            HorizontalContentAlignment="Stretch"
-            ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding BottomTodoLists.Todos}"
-            SelectedItem="{Binding BottomTodoLists.SelectionItem}" />
+                    <TextBlock
+                        Width="auto"
+                        Margin="4,0"
+                        Text="完了済み :" />
 
-        <StatusBar
-            Grid.Row="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Background="{StaticResource DarkBgBrush}">
+                    <TextBlock Margin="4,0" Text="{Binding CompleteTodoCount}" />
+
+                </StackPanel>
+            </StatusBar>
+
+            <Border
+                Height="0.5"
+                Margin="0,5"
+                Background="WhiteSmoke" />
+
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="4,0" Text="表示中のTodo :" />
-                <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
+                <TextBlock Text="Group : " />
+                <ComboBox
+                    Width="250"
+                    Margin="0"
+                    Padding="1"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    BorderThickness="0"
+                    ItemsSource="{Binding TopTodoLists.Groups}">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Padding="3,0"
+                                Background="{StaticResource DarkBgBrush}"
+                                Foreground="WhiteSmoke"
+                                Text="GName" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="BorderBrush" Value="DarkGray" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+
+            </StackPanel>
+
+            <Border Height="0" Margin="0,3" />
+
+            <DockPanel>
+                <TextBlock Text="Title : " />
+                <TextBox Text="{Binding CurrentTodo.Title}" />
+            </DockPanel>
+
+            <Border Height="0" Margin="0,2" />
+
+            <DockPanel>
+                <TextBlock Text="Detail : " />
+
+                <TextBox
+                    Height="40"
+                    AcceptsReturn="True"
+                    Text="{Binding CurrentTodo.Detail}" />
+            </DockPanel>
+
+            <Border Height="0" Margin="0,4" />
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Limit : " />
+                <TextBox Width="100" HorizontalAlignment="Left" />
 
                 <Border
                     Width="1"
-                    Margin="5,0"
-                    Background="Gray" />
+                    Margin="15,0"
+                    Background="WhiteSmoke" />
 
-                <TextBlock Margin="4,0" Text="完了済み :" />
-                <TextBlock Margin="4,0" Text="{Binding CompleteTodoCount}" />
+                <TextBlock Width="auto" Text="Create as completed todo" />
+                <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
-        </StatusBar>
-
+        </StackPanel>
     </Grid>
 </Window>
