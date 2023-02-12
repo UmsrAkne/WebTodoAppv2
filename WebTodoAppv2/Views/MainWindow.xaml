@@ -39,7 +39,7 @@
 
     </Window.InputBindings>
 
-    <Grid>
+    <Grid Background="{StaticResource DarkBgBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition />
@@ -104,25 +104,70 @@
 
         </Grid>
 
-        <StatusBar
+        <StackPanel
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Background="{StaticResource DarkBgBrush}">
+            Grid.ColumnSpan="2">
+
+            <StatusBar Background="{StaticResource DarkBgBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="4,0" Text="表示中のTodo :" />
+                    <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
+
+                    <Border
+                        Width="1"
+                        Margin="5,0"
+                        Background="Gray" />
+
+                    <TextBlock Margin="4,0" Text="完了済み :" />
+                    <TextBlock Margin="4,0" Text="{Binding CompleteTodoCount}" />
+
+                </StackPanel>
+            </StatusBar>
+
+            <Border
+                Height="0.5"
+                Margin="0,5"
+                Background="WhiteSmoke" />
+
+            <DockPanel>
+                <TextBlock
+                    Width="100"
+                    Padding="10,0"
+                    Text="Title : " />
+                <TextBox />
+            </DockPanel>
+
+            <Border Height="0" Margin="0,2" />
+
+            <DockPanel>
+                <TextBlock
+                    Width="100"
+                    Padding="10,0"
+                    Text="Detail : " />
+                <TextBox Height="40" AcceptsReturn="True" />
+            </DockPanel>
+
+            <Border Height="0" Margin="0,4" />
+
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="4,0" Text="表示中のTodo :" />
-                <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
+                <TextBlock
+                    Width="100"
+                    Padding="10,0"
+                    Text="Limit" />
+
+                <TextBox Width="100" HorizontalAlignment="Left" />
 
                 <Border
                     Width="1"
-                    Margin="5,0"
-                    Background="Gray" />
+                    Margin="15,0"
+                    Background="WhiteSmoke" />
 
-                <TextBlock Margin="4,0" Text="完了済み :" />
-                <TextBlock Margin="4,0" Text="{Binding CompleteTodoCount}" />
+                <TextBlock Text="Create as completed todo" />
+
+                <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
-        </StatusBar>
-
+        </StackPanel>
     </Grid>
 </Window>
