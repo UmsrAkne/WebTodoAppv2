@@ -18,6 +18,7 @@ namespace WebTodoAppv2.ViewModels
         private string title = "Web todo app v2";
 
         private int completeTodoCount;
+        private Todo currentTodo;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -52,6 +53,8 @@ namespace WebTodoAppv2.ViewModels
         public bool DatabaseConnection { get => databaseConnection; private set => SetProperty(ref databaseConnection, value); }
 
         public TodoLists TopTodoLists { get; } = new ();
+
+        public Todo CurrentTodo { get => currentTodo; set => SetProperty(ref currentTodo, value); }
 
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }

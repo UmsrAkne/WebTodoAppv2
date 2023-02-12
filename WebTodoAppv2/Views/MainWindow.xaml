@@ -135,7 +135,7 @@
                     Width="100"
                     Padding="10,0"
                     Text="Title : " />
-                <TextBox />
+                <TextBox Text="{Binding CurrentTodo.Title}" />
             </DockPanel>
 
             <Border Height="0" Margin="0,2" />
@@ -145,7 +145,11 @@
                     Width="100"
                     Padding="10,0"
                     Text="Detail : " />
-                <TextBox Height="40" AcceptsReturn="True" />
+
+                <TextBox
+                    Height="40"
+                    AcceptsReturn="True"
+                    Text="{Binding CurrentTodo.Detail}" />
             </DockPanel>
 
             <Border Height="0" Margin="0,4" />
