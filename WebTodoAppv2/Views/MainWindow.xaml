@@ -109,9 +109,20 @@
             Grid.Column="0"
             Grid.ColumnSpan="2">
 
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                    <Setter Property="Padding" Value="10,0" />
+                    <Setter Property="Width" Value="80" />
+                </Style>
+            </StackPanel.Resources>
+
             <StatusBar Background="{StaticResource DarkBgBrush}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="4,0" Text="表示中のTodo :" />
+                    <TextBlock
+                        Width="auto"
+                        Margin="4,0"
+                        Text="表示中のTodo :" />
+
                     <TextBlock Margin="4,0" Text="{Binding TopTodoLists.Todos.Count}" />
 
                     <Border
@@ -119,7 +130,11 @@
                         Margin="5,0"
                         Background="Gray" />
 
-                    <TextBlock Margin="4,0" Text="完了済み :" />
+                    <TextBlock
+                        Width="auto"
+                        Margin="4,0"
+                        Text="完了済み :" />
+
                     <TextBlock Margin="4,0" Text="{Binding CompleteTodoCount}" />
 
                 </StackPanel>
@@ -130,21 +145,49 @@
                 Margin="0,5"
                 Background="WhiteSmoke" />
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Group : " />
+                <ComboBox
+                    Width="250"
+                    Margin="0"
+                    Padding="1"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    BorderThickness="0"
+                    ItemsSource="{Binding TopTodoLists.Groups}">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Padding="3,0"
+                                Background="{StaticResource DarkBgBrush}"
+                                Foreground="WhiteSmoke"
+                                Text="GName" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="BorderBrush" Value="DarkGray" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+
+            </StackPanel>
+
+            <Border Height="0" Margin="0,3" />
+
             <DockPanel>
-                <TextBlock
-                    Width="100"
-                    Padding="10,0"
-                    Text="Title : " />
+                <TextBlock Text="Title : " />
                 <TextBox Text="{Binding CurrentTodo.Title}" />
             </DockPanel>
 
             <Border Height="0" Margin="0,2" />
 
             <DockPanel>
-                <TextBlock
-                    Width="100"
-                    Padding="10,0"
-                    Text="Detail : " />
+                <TextBlock Text="Detail : " />
 
                 <TextBox
                     Height="40"
@@ -155,11 +198,7 @@
             <Border Height="0" Margin="0,4" />
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="100"
-                    Padding="10,0"
-                    Text="Limit" />
-
+                <TextBlock Text="Limit : " />
                 <TextBox Width="100" HorizontalAlignment="Left" />
 
                 <Border
@@ -167,8 +206,7 @@
                     Margin="15,0"
                     Background="WhiteSmoke" />
 
-                <TextBlock Text="Create as completed todo" />
-
+                <TextBlock Width="auto" Text="Create as completed todo" />
                 <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
