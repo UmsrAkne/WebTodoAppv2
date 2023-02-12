@@ -37,12 +37,6 @@
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
 
-        <KeyBinding
-            Key="N"
-            Command="{Binding ShowTodoAdditionPageCommand}"
-            CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
-            Modifiers="Ctrl+Shift" />
-
     </Window.InputBindings>
 
     <Grid>
@@ -52,8 +46,6 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
             <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
@@ -71,11 +63,6 @@
                     Command="{Binding ShowTodoAdditionPageCommand}"
                     CommandParameter="{Binding TopTodoLists.CurrentGroup}"
                     Header="上のグループに Todo を追加" />
-
-                <MenuItem
-                    Command="{Binding ShowTodoAdditionPageCommand}"
-                    CommandParameter="{Binding BottomTodoLists.CurrentGroup}"
-                    Header="下のグループに Todo を追加" />
             </MenuItem>
 
             <MenuItem Header="Group" IsEnabled="{Binding DatabaseConnection}">
@@ -117,46 +104,8 @@
 
         </Grid>
 
-        <GridSplitter
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Height="4"
-            HorizontalAlignment="Stretch"
-            Background="{StaticResource LightBgBrush}"
-            BorderThickness="0" />
-
-        <Grid Grid.Row="3" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <TextBlock
-                Grid.Row="0"
-                Padding="5,4"
-                Background="{StaticResource DarkBgBrush}"
-                Text="Groups" />
-
-            <ListView
-                Grid.Row="1"
-                ItemTemplate="{StaticResource GroupListViewDataTemplate}"
-                ItemsSource="{Binding BottomTodoLists.Groups}"
-                SelectedItem="{Binding BottomTodoLists.CurrentGroup}" />
-
-        </Grid>
-
-        <ListView
-            Name="TodoListViewBottom"
-            Grid.Row="3"
-            Grid.Column="1"
-            HorizontalContentAlignment="Stretch"
-            ItemTemplate="{StaticResource ListViewDataTemplate}"
-            ItemsSource="{Binding BottomTodoLists.Todos}"
-            SelectedItem="{Binding BottomTodoLists.SelectionItem}" />
-
         <StatusBar
-            Grid.Row="4"
+            Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="{StaticResource DarkBgBrush}">
