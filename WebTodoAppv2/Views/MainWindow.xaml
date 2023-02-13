@@ -32,6 +32,11 @@
 
     <Window.InputBindings>
         <KeyBinding
+            Key="Enter"
+            Command="{Binding AddTodoCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
             Key="N"
             Command="{Binding ShowTodoAdditionPageCommand}"
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
@@ -107,12 +112,16 @@
         <StackPanel
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Margin="3">
 
             <StackPanel.Resources>
                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                     <Setter Property="Padding" Value="10,0" />
                     <Setter Property="Width" Value="80" />
+                </Style>
+                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                    <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
                 </Style>
             </StackPanel.Resources>
 
@@ -154,7 +163,9 @@
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
                     BorderThickness="0"
-                    ItemsSource="{Binding TopTodoLists.Groups}">
+                    ItemsSource="{Binding TopTodoLists.Groups}"
+                    SelectedIndex="0"
+                    SelectedItem="{Binding TopTodoLists.CurrentGroup}">
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -162,7 +173,7 @@
                                 Padding="3,0"
                                 Background="{StaticResource DarkBgBrush}"
                                 Foreground="WhiteSmoke"
-                                Text="GName" />
+                                Text="{Binding Name}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
 
@@ -210,6 +221,18 @@
                 <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
+
+            <Button
+                Width="160"
+                HorizontalAlignment="Right"
+                Command="{Binding AddTodoCommand}">
+
+                <TextBlock
+                    Width="120"
+                    Foreground="Black"
+                    Text="Post (Ctrl + Enter)" />
+            </Button>
+
         </StackPanel>
     </Grid>
 </Window>
