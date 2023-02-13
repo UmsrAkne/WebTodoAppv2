@@ -112,7 +112,8 @@
         <StackPanel
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Margin="3">
 
             <StackPanel.Resources>
                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -222,11 +223,15 @@
             </StackPanel>
 
             <Button
-                Width="140"
+                Width="160"
                 HorizontalAlignment="Right"
-                Background="{StaticResource LightBgBrush}"
-                Command="{Binding AddTodoCommand}"
-                Content="Post (Ctrl + Enter)" />
+                Command="{Binding AddTodoCommand}">
+
+                <TextBlock
+                    Width="120"
+                    Foreground="Black"
+                    Text="Post (Ctrl + Enter)" />
+            </Button>
 
         </StackPanel>
     </Grid>
