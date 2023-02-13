@@ -114,6 +114,9 @@
                     <Setter Property="Padding" Value="10,0" />
                     <Setter Property="Width" Value="80" />
                 </Style>
+                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                    <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+                </Style>
             </StackPanel.Resources>
 
             <StatusBar Background="{StaticResource DarkBgBrush}">
