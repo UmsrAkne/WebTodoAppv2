@@ -18,7 +18,9 @@ namespace WebTodoAppv2.ViewModels
         private string title = "Web todo app v2";
 
         private int completeTodoCount;
-        private Todo currentTodo;
+        private Todo currentTodo = new Todo();
+
+        private DelegateCommand addTodoCommand;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -63,6 +65,27 @@ namespace WebTodoAppv2.ViewModels
         {
             using var context = TodoDbContext;
             context.AddOperation(new Operation() { Kind = OperationKind.Complete, DateTime = DateTime.Now, TodoId = todo.Id });
+            Reload();
+        });
+
+        public DelegateCommand AddTodoCommand => addTodoCommand ??= new DelegateCommand(() =>
+        {
+            if (string.IsNullOrWhiteSpace(CurrentTodo.Title + CurrentTodo.Detail))
+            {
+                return;
+            }
+
+            var todo = new Todo()
+            {
+                Title = CurrentTodo.Title,
+                Detail = CurrentTodo.Detail,
+                CreationDateTime = DateTime.Now,
+                GroupName = TopTodoLists.CurrentGroup.Name,
+            };
+
+            using var context = TodoDbContext;
+            context.AddTodo(todo);
+            CurrentTodo = new Todo();
             Reload();
         });
 

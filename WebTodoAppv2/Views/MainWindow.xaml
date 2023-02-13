@@ -154,7 +154,9 @@
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
                     BorderThickness="0"
-                    ItemsSource="{Binding TopTodoLists.Groups}">
+                    ItemsSource="{Binding TopTodoLists.Groups}"
+                    SelectedIndex="0"
+                    SelectedItem="{Binding TopTodoLists.CurrentGroup}">
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -162,7 +164,7 @@
                                 Padding="3,0"
                                 Background="{StaticResource DarkBgBrush}"
                                 Foreground="WhiteSmoke"
-                                Text="GName" />
+                                Text="{Binding Name}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
 
@@ -210,6 +212,14 @@
                 <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
+
+            <Button
+                Width="140"
+                HorizontalAlignment="Right"
+                Background="{StaticResource LightBgBrush}"
+                Command="{Binding AddTodoCommand}"
+                Content="Post (Ctrl + Enter)" />
+
         </StackPanel>
     </Grid>
 </Window>
