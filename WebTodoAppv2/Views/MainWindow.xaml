@@ -32,6 +32,11 @@
 
     <Window.InputBindings>
         <KeyBinding
+            Key="Enter"
+            Command="{Binding AddTodoCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
             Key="N"
             Command="{Binding ShowTodoAdditionPageCommand}"
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
