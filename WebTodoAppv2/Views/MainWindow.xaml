@@ -210,7 +210,10 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Limit : " />
-                <TextBox Width="100" HorizontalAlignment="Left" />
+                <TextBox
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    Text="{Binding LimitDateTimeText}" />
 
                 <Border
                     Width="1"
