@@ -16,6 +16,7 @@ namespace WebTodoAppv2.ViewModels
         private readonly IDialogService dialogService;
         private bool databaseConnection;
         private string title = "Web todo app v2";
+        private string limitDateTimeText = "0d";
 
         private int completeTodoCount;
         private Todo currentTodo = new Todo();
@@ -61,6 +62,8 @@ namespace WebTodoAppv2.ViewModels
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
+        public string LimitDateTimeText { get => limitDateTimeText; set => SetProperty(ref limitDateTimeText, value); }
+
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {
             using var context = TodoDbContext;
@@ -81,7 +84,13 @@ namespace WebTodoAppv2.ViewModels
                 Detail = CurrentTodo.Detail,
                 CreationDateTime = DateTime.Now,
                 GroupName = TopTodoLists.CurrentGroup.Name,
+                LimitDateTime = DateTimeTextConverter.ConvertDateTimeText(LimitDateTimeText, DateTime.Now),
             };
+
+            if (todo.LimitDateTime == default)
+            {
+                todo.LimitDateTime = DateTimeTextConverter.ConvertDateTimeText("0d", DateTime.Now);
+            }
 
             using var context = TodoDbContext;
             context.AddTodo(todo);
