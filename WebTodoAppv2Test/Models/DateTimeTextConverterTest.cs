@@ -49,5 +49,14 @@ namespace WebTodoAppv2Test.Models
 
             Assert.AreEqual(new DateTime(), DateTimeTextConverter.ConvertDateTimeText("xd", today));
         }
+
+        [Test]
+        public void ConvertTimeSpanTextTest()
+        {
+            Assert.AreEqual(TimeSpan.FromDays(1), DateTimeTextConverter.ConvertTimeSpanText("1d"));
+            Assert.AreEqual(TimeSpan.FromHours(1), DateTimeTextConverter.ConvertTimeSpanText("1h"));
+            Assert.AreEqual(TimeSpan.FromMinutes(1), DateTimeTextConverter.ConvertTimeSpanText("1m"));
+            Assert.AreEqual(TimeSpan.FromSeconds(1), DateTimeTextConverter.ConvertTimeSpanText("1s"));
+        }
     }
 }

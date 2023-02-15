@@ -36,5 +36,29 @@ namespace WebTodoAppv2.Models
                 _ => default,
             };
         }
+
+        public static TimeSpan ConvertTimeSpanText(string text)
+        {
+            text = text.Replace(" ", string.Empty); // 予め空白だけは削除しておく
+
+            if (string.IsNullOrWhiteSpace(text) || !Regex.IsMatch(text, "^\\d+[dhms]$"))
+            {
+                // 所定フォーマットに合致しない場合は既定値を返す
+                return default;
+            }
+
+            var match = Regex.Match(text, "^(\\d+)([dhms])$");
+            var amount = int.Parse(match.Groups[1].Value);
+            var unit = match.Groups[2].Value;
+
+            return unit switch
+            {
+                "d" => TimeSpan.FromDays(amount),
+                "h" => TimeSpan.FromHours(amount),
+                "m" => TimeSpan.FromMinutes(amount),
+                "s" => TimeSpan.FromSeconds(amount),
+                _ => default,
+            };
+        }
     }
 }

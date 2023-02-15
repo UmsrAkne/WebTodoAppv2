@@ -88,6 +88,7 @@ namespace WebTodoAppv2.ViewModels
                 CreationDateTime = DateTime.Now,
                 GroupName = TopTodoLists.CurrentGroup.Name,
                 LimitDateTime = DateTimeTextConverter.ConvertDateTimeText(LimitDateTimeText, DateTime.Now),
+                DurationTicks = DateTimeTextConverter.ConvertTimeSpanText(DurationTicksText).Ticks,
             };
 
             if (todo.LimitDateTime == default)
