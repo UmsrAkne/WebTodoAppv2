@@ -17,6 +17,7 @@ namespace WebTodoAppv2.ViewModels
         private bool databaseConnection;
         private string title = "Web todo app v2";
         private string limitDateTimeText = "0d";
+        private string durationTicksText = "60m";
 
         private int completeTodoCount;
         private Todo currentTodo = new Todo();
@@ -63,6 +64,8 @@ namespace WebTodoAppv2.ViewModels
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
 
         public string LimitDateTimeText { get => limitDateTimeText; set => SetProperty(ref limitDateTimeText, value); }
+
+        public string DurationTicksText { get => durationTicksText; set => SetProperty(ref durationTicksText, value); }
 
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {

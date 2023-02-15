@@ -220,7 +220,16 @@
                     Margin="15,0"
                     Background="WhiteSmoke" />
 
+                <TextBlock Text="Duration : " />
+                <TextBox Width="80" Text="{Binding DurationTicksText}" />
+
+                <Border
+                    Width="1"
+                    Margin="15,0"
+                    Background="WhiteSmoke" />
+
                 <TextBlock Width="auto" Text="Create as completed todo" />
+
                 <CheckBox Margin="10,0" VerticalAlignment="Center" />
 
             </StackPanel>
