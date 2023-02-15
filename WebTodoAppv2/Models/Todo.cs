@@ -31,6 +31,9 @@ namespace WebTodoAppv2.Models
         [Required]
         public int GroupId { get; set; }
 
+        [Required]
+        public long DurationTicks { get; set; }
+
         [NotMapped]
         public WorkingState WorkingState { get => workingState; set => SetProperty(ref workingState, value); }
 
