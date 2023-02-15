@@ -206,23 +206,39 @@
                     Text="{Binding CurrentTodo.Detail}" />
             </DockPanel>
 
-            <Border Height="0" Margin="0,4" />
+            <Border
+                Height="0.5"
+                Margin="0,8"
+                Background="WhiteSmoke" />
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Limit : " />
+                <TextBlock Width="140" Text="Time management : " />
+
+                <Border Width="0" Margin="5,0" />
+
+                <TextBlock
+                    Width="auto"
+                    Margin="0"
+                    Text="Limit : " />
+
                 <TextBox
-                    Width="100"
+                    Width="60"
                     HorizontalAlignment="Left"
                     Text="{Binding LimitDateTimeText}" />
 
                 <Border
                     Width="1"
-                    Margin="15,0"
+                    Margin="15,0,0,0"
                     Background="WhiteSmoke" />
 
-                <TextBlock Width="auto" Text="Create as completed todo" />
-                <CheckBox Margin="10,0" VerticalAlignment="Center" />
+                <TextBlock Text="Duration : " />
+                <TextBox Width="60" Text="{Binding DurationTicksText}" />
 
+            </StackPanel>
+
+            <StackPanel Margin="0,6" Orientation="Horizontal">
+                <TextBlock Width="auto" Text="Create as completed todo" />
+                <CheckBox VerticalAlignment="Center" />
             </StackPanel>
 
             <Button

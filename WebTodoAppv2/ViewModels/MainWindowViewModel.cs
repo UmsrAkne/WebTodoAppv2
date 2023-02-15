@@ -17,6 +17,7 @@ namespace WebTodoAppv2.ViewModels
         private bool databaseConnection;
         private string title = "Web todo app v2";
         private string limitDateTimeText = "0d";
+        private string durationTicksText = "60m";
 
         private int completeTodoCount;
         private Todo currentTodo = new Todo();
@@ -64,6 +65,8 @@ namespace WebTodoAppv2.ViewModels
 
         public string LimitDateTimeText { get => limitDateTimeText; set => SetProperty(ref limitDateTimeText, value); }
 
+        public string DurationTicksText { get => durationTicksText; set => SetProperty(ref durationTicksText, value); }
+
         public DelegateCommand<Todo> CompleteTodoCommand => new DelegateCommand<Todo>((todo) =>
         {
             using var context = TodoDbContext;
@@ -85,6 +88,7 @@ namespace WebTodoAppv2.ViewModels
                 CreationDateTime = DateTime.Now,
                 GroupName = TopTodoLists.CurrentGroup.Name,
                 LimitDateTime = DateTimeTextConverter.ConvertDateTimeText(LimitDateTimeText, DateTime.Now),
+                DurationTicks = DateTimeTextConverter.ConvertTimeSpanText(DurationTicksText).Ticks,
             };
 
             if (todo.LimitDateTime == default)
