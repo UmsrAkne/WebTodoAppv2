@@ -17,4 +17,8 @@
       <ProjectReference Include="..\WebTodoAppv2\WebTodoAppv2.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="UnitTest1.cs" />
+    </ItemGroup>
+
 </Project>
