@@ -42,6 +42,11 @@
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
 
+        <KeyBinding
+            Key="C"
+            Command="{Binding CopyTodoCommand}"
+            Modifiers="Ctrl" />
+
     </Window.InputBindings>
 
     <Grid Background="{StaticResource DarkBgBrush}">
