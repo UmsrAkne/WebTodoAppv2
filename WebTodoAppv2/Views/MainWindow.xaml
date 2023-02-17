@@ -42,6 +42,11 @@
             CommandParameter="{Binding TopTodoLists.CurrentGroup}"
             Modifiers="Ctrl" />
 
+        <KeyBinding
+            Key="C"
+            Command="{Binding CopyTodoCommand}"
+            Modifiers="Ctrl" />
+
     </Window.InputBindings>
 
     <Grid Background="{StaticResource DarkBgBrush}">
@@ -68,6 +73,8 @@
                     Command="{Binding ShowTodoAdditionPageCommand}"
                     CommandParameter="{Binding TopTodoLists.CurrentGroup}"
                     Header="上のグループに Todo を追加" />
+
+                <MenuItem Command="{Binding CopyTodoCommand}" Header="Todo の情報を複製" />
             </MenuItem>
 
             <MenuItem Header="Group" IsEnabled="{Binding DatabaseConnection}">

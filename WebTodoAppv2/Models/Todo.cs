@@ -64,5 +64,24 @@ namespace WebTodoAppv2.Models
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
+
+        /// <summary>
+        /// この Todo の情報をコピーした新しい Todo を取得します。
+        /// ただし、 CreationDateTime はメソッド実行時の時刻に、
+        /// Id, LimitDateTime はデフォルト値に設定されます。
+        /// </summary>
+        /// <returns>この Todo のコピー</returns>
+        public Todo GetCopy()
+        {
+            return new Todo
+            {
+                Title = Title,
+                Detail = Detail,
+                CreationDateTime = DateTime.Now,
+                GroupId = GroupId,
+                DurationTicks = DurationTicks,
+                GroupName = GroupName,
+            };
+        }
     }
 }

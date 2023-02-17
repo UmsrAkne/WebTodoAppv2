@@ -23,6 +23,7 @@ namespace WebTodoAppv2.ViewModels
         private Todo currentTodo = new Todo();
 
         private DelegateCommand addTodoCommand;
+        private DelegateCommand copyTodoCommand;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -168,6 +169,16 @@ namespace WebTodoAppv2.ViewModels
 
             using var context = TodoDbContext;
             context.AddOperation(operation);
+        });
+
+        public DelegateCommand CopyTodoCommand => copyTodoCommand ??= new DelegateCommand(() =>
+        {
+            if (TopTodoLists.SelectionItem == null)
+            {
+                return;
+            }
+
+            CurrentTodo = TopTodoLists.SelectionItem.GetCopy();
         });
 
         private TodoDbContext TodoDbContext
