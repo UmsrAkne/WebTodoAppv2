@@ -17,6 +17,7 @@ namespace WebTodoAppv2.Models
         {
             text = text.Replace(" ", string.Empty); // 予め空白だけは削除しておく
 
+            // ReSharper disable once StringLiteralTypo
             if (string.IsNullOrWhiteSpace(text) || !Regex.IsMatch(text, "^\\d+[dhms]$"))
             {
                 // 所定フォーマットに合致しない場合は既定値を返す
@@ -41,6 +42,7 @@ namespace WebTodoAppv2.Models
         {
             text = text.Replace(" ", string.Empty); // 予め空白だけは削除しておく
 
+            // ReSharper disable once StringLiteralTypo
             if (string.IsNullOrWhiteSpace(text) || !Regex.IsMatch(text, "^\\d+[dhms]$"))
             {
                 // 所定フォーマットに合致しない場合は既定値を返す
