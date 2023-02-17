@@ -52,7 +52,13 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
                 <StackPanel
+                    Grid.Row="0"
                     Grid.Column="0"
                     Margin="5,0"
                     Orientation="Horizontal">
@@ -108,7 +114,7 @@
 
                 </StackPanel>
 
-                <ContentControl Grid.Column="1">
+                <ContentControl Grid.Row="0" Grid.Column="1">
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
@@ -144,6 +150,27 @@
                     </Border>
 
                 </ContentControl>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2">
+
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DataContext.IsMultiLineView, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        Opacity="0.7"
+                        Text="{Binding Detail}" />
+                </StackPanel>
 
             </Grid>
 

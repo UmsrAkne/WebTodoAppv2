@@ -84,6 +84,10 @@
             <MenuItem Header="Database">
                 <MenuItem Command="{Binding ShowConnectionPageCommand}" Header="接続設定" />
             </MenuItem>
+
+            <MenuItem Header="View">
+                <MenuItem Command="{Binding ToggleViewModeCommand}" Header="シングルライン / マルチライン" />
+            </MenuItem>
         </Menu>
 
         <ListView

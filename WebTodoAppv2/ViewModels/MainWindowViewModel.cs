@@ -18,6 +18,7 @@ namespace WebTodoAppv2.ViewModels
         private string title = "Web todo app v2";
         private string limitDateTimeText = "0d";
         private string durationTicksText = "60m";
+        private bool isMultiLineView;
 
         private int completeTodoCount;
         private Todo currentTodo = new Todo();
@@ -60,6 +61,8 @@ namespace WebTodoAppv2.ViewModels
         public TodoLists TopTodoLists { get; } = new ();
 
         public Todo CurrentTodo { get => currentTodo; private set => SetProperty(ref currentTodo, value); }
+
+        public bool IsMultiLineView { get => isMultiLineView; set => SetProperty(ref isMultiLineView, value); }
 
         // ReSharper disable once MemberCanBePrivate.Global
         public int CompleteTodoCount { get => completeTodoCount; set => SetProperty(ref completeTodoCount, value); }
@@ -180,6 +183,8 @@ namespace WebTodoAppv2.ViewModels
 
             CurrentTodo = TopTodoLists.SelectionItem.GetCopy();
         });
+
+        public DelegateCommand ToggleViewModeCommand => new DelegateCommand(() => IsMultiLineView = !IsMultiLineView);
 
         private TodoDbContext TodoDbContext
         {
