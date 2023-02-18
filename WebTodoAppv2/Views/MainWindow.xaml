@@ -203,7 +203,7 @@
 
             <DockPanel>
                 <TextBlock Text="Title : " />
-                <TextBox Text="{Binding CurrentTodo.Title}" />
+                <TextBox Text="{Binding CurrentTodo.Title, UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
             <Border Height="0" Margin="0,2" />
@@ -214,7 +214,7 @@
                 <TextBox
                     Height="40"
                     AcceptsReturn="True"
-                    Text="{Binding CurrentTodo.Detail}" />
+                    Text="{Binding CurrentTodo.Detail, UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
             <Border
