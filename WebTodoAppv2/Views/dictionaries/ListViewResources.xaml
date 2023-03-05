@@ -40,6 +40,27 @@
 
     </Style>
 
+    <ControlTemplate x:Key="MenuItemControlTemplate" TargetType="MenuItem">
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="DodgerBlue" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+        <Border BorderThickness="0">
+            <TextBlock
+                Padding="6,3"
+                Background="{TemplateBinding Background}"
+                FontSize="14"
+                Foreground="WhiteSmoke"
+                Text="{TemplateBinding Header}" />
+        </Border>
+    </ControlTemplate>
+
     <DataTemplate x:Key="ListViewDataTemplate" DataType="{x:Type models:Todo}">
         <DataTemplate.Resources>
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
@@ -248,11 +269,12 @@
             </StackPanel>
 
             <Border.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Padding="1">
                     <MenuItem
                         Command="{Binding PlacementTarget.(FrameworkElement.Tag).(viewModels:MainWindowViewModel.StartGroupNameEditCommand), RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                         CommandParameter="{Binding}"
-                        Header="グループ名を変更" />
+                        Header="グループ名を変更"
+                        Template="{StaticResource MenuItemControlTemplate}" />
                 </ContextMenu>
             </Border.ContextMenu>
 
