@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:models="clr-namespace:WebTodoAppv2.Models">
+    xmlns:models="clr-namespace:WebTodoAppv2.Models"
+    xmlns:viewModels="clr-namespace:WebTodoAppv2.ViewModels">
 
     <Style x:Key="RadiusButtonStyle" TargetType="Button">
 
@@ -39,12 +40,33 @@
 
     </Style>
 
+    <ControlTemplate x:Key="MenuItemControlTemplate" TargetType="MenuItem">
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="DodgerBlue" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+        <Border BorderThickness="0">
+            <TextBlock
+                Padding="6,3"
+                Background="{TemplateBinding Background}"
+                FontSize="14"
+                Foreground="WhiteSmoke"
+                Text="{TemplateBinding Header}" />
+        </Border>
+    </ControlTemplate>
+
     <DataTemplate x:Key="ListViewDataTemplate" DataType="{x:Type models:Todo}">
         <DataTemplate.Resources>
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
 
-        <Border>
+        <Border Margin="0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -247,12 +269,12 @@
             </StackPanel>
 
             <Border.ContextMenu>
-                <ContextMenu>
-                    <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
+                <ContextMenu Padding="1">
                     <MenuItem
-                        Command="{Binding PlacementTarget.Tag.StartGroupNameEditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        Command="{Binding PlacementTarget.(FrameworkElement.Tag).(viewModels:MainWindowViewModel.StartGroupNameEditCommand), RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                         CommandParameter="{Binding}"
-                        Header="test" />
+                        Header="グループ名を変更"
+                        Template="{StaticResource MenuItemControlTemplate}" />
                 </ContextMenu>
             </Border.ContextMenu>
 
