@@ -44,7 +44,7 @@
             <converters:DateTimeConverter x:Key="DateTimeConverter" />
         </DataTemplate.Resources>
 
-        <Border>
+        <Border Margin="0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
