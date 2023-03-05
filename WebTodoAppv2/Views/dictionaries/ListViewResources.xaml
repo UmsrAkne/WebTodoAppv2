@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:WebTodoAppv2.Models.Converters"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:models="clr-namespace:WebTodoAppv2.Models">
+    xmlns:models="clr-namespace:WebTodoAppv2.Models"
+    xmlns:viewModels="clr-namespace:WebTodoAppv2.ViewModels">
 
     <Style x:Key="RadiusButtonStyle" TargetType="Button">
 
@@ -248,9 +249,8 @@
 
             <Border.ContextMenu>
                 <ContextMenu>
-                    <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
                     <MenuItem
-                        Command="{Binding PlacementTarget.Tag.StartGroupNameEditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        Command="{Binding PlacementTarget.(FrameworkElement.Tag).(viewModels:MainWindowViewModel.StartGroupNameEditCommand), RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                         CommandParameter="{Binding}"
                         Header="グループ名を変更" />
                 </ContextMenu>
