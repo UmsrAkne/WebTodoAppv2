@@ -118,14 +118,30 @@ namespace WebTodoAppv2.ViewModels
 
         public DelegateCommand<Group> StartGroupNameEditCommand => new DelegateCommand<Group>((group) =>
         {
-            group.EditMode = true;
-        });
+            dialogService.ShowDialog(
+                nameof(InputDialog),
+                new DialogParameters()
+                {
+                    { nameof(InputDialogViewModel.Message), "グループ名を編集してください。" },
+                    { nameof(InputDialogViewModel.Text), group.Name },
+                },
+                result =>
+                {
+                    if (result.Result == ButtonResult.OK)
+                    {
+                        using var context = TodoDbContext;
 
-        public DelegateCommand<Group> ConfirmGroupNameCommand => new DelegateCommand<Group>((group) =>
-        {
-            using var context = TodoDbContext;
-            context.SaveChanges();
-            group.EditMode = false;
+                        // この処理が実行される際、group は既に EF から追跡されていないので、group を更新しても DB は更新されない。
+                        // そのため、改めて group を取得してそれを更新する。
+                        var g = context.GetGroups().FirstOrDefault(g => g.Id == group.Id);
+                        if (g != null)
+                        {
+                            g.Name = result.Parameters.GetValue<string>(nameof(InputDialogViewModel.Text));
+                            group.Name = result.Parameters.GetValue<string>(nameof(InputDialogViewModel.Text));
+                            context.SaveChanges();
+                        }
+                    }
+                });
         });
 
         public DelegateCommand<Todo> ShowDetailPageCommand => new DelegateCommand<Todo>((t) =>

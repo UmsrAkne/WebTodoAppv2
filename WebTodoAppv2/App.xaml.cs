@@ -22,6 +22,7 @@ namespace WebTodoAppv2
             containerRegistry.RegisterDialog<DetailPage, DetailPageViewModel>();
             containerRegistry.RegisterDialog<TodoAdditionPage, TodoAdditionPageViewModel>();
             containerRegistry.RegisterDialog<ConnectionPage, ConnectionPageViewModel>();
+            containerRegistry.RegisterDialog<InputDialog, InputDialogViewModel>();
 
             var dbContext = new TodoDbContext();
 

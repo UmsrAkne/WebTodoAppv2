@@ -259,12 +259,6 @@
                         </Style>
                     </TextBox.Style>
 
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.ConfirmGroupNameCommand, ElementName=Window}" CommandParameter="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-
                 </TextBox>
             </StackPanel>
 
