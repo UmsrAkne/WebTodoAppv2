@@ -8,6 +8,7 @@ namespace WebTodoAppv2.ViewModels
     public class InputDialogViewModel : BindableBase, IDialogAware
     {
         private string message;
+        private string text;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -18,7 +19,16 @@ namespace WebTodoAppv2.ViewModels
             RequestClose?.Invoke(new DialogResult());
         });
 
-        public string Message { get => message; set => SetProperty(ref message, value); }
+        public DelegateCommand OkCommand => new DelegateCommand(() =>
+        {
+            var result = new DialogResult(ButtonResult.OK);
+            result.Parameters.Add(nameof(Text), Text);
+            RequestClose?.Invoke(result);
+        });
+
+        public string Message { get => message; private set => SetProperty(ref message, value); }
+
+        public string Text { get => text; set => SetProperty(ref text, value); }
 
         public bool CanCloseDialog() => true;
 
@@ -28,6 +38,8 @@ namespace WebTodoAppv2.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            Message = parameters.GetValue<string>(nameof(Message));
+            Text = parameters.GetValue<string>(nameof(Text));
         }
     }
 }
