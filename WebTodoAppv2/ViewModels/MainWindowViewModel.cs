@@ -144,13 +144,6 @@ namespace WebTodoAppv2.ViewModels
                 });
         });
 
-        public DelegateCommand<Group> ConfirmGroupNameCommand => new DelegateCommand<Group>((group) =>
-        {
-            using var context = TodoDbContext;
-            context.SaveChanges();
-            group.EditMode = false;
-        });
-
         public DelegateCommand<Todo> ShowDetailPageCommand => new DelegateCommand<Todo>((t) =>
         {
             dialogService.ShowDialog(nameof(DetailPage), new DialogParameters() { { nameof(Todo), t } }, _ => { });
