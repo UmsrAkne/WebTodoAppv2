@@ -255,13 +255,9 @@
             <Button
                 Width="160"
                 HorizontalAlignment="Right"
-                Command="{Binding AddTodoCommand}">
-
-                <TextBlock
-                    Width="120"
-                    Foreground="Black"
-                    Text="Post (Ctrl + Enter)" />
-            </Button>
+                Command="{Binding AddTodoCommand}"
+                Content="Post (Ctrl + Enter)"
+                Template="{StaticResource ButtonControlTemplate}" />
 
         </StackPanel>
     </Grid>

@@ -32,18 +32,16 @@
             Orientation="Horizontal">
 
             <Button
-                Padding="3"
-                Background="{StaticResource LightBgBrush}"
                 Command="{Binding OkCommand}"
-                Content="OK (Ctrl + Enter)" />
+                Content="OK (Ctrl + Enter)"
+                Template="{StaticResource ButtonControlTemplate}" />
 
             <Border Width="0" Margin="8,0" />
 
             <Button
-                Padding="3"
-                Background="{StaticResource LightBgBrush}"
                 Command="{Binding CloseCommand}"
-                Content="Cancel (Escape)" />
+                Content="Cancel (Escape)"
+                Template="{StaticResource ButtonControlTemplate}" />
         </StackPanel>
     </StackPanel>
 </Page>
