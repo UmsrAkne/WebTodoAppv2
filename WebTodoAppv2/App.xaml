@@ -22,5 +22,27 @@
             <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
         </Style>
 
+        <ControlTemplate x:Key="ButtonControlTemplate" TargetType="Button">
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DarkBgBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+            <Border
+                Padding="4"
+                Background="{TemplateBinding Background}"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="2">
+
+                <TextBlock Text="{TemplateBinding Content}" TextAlignment="Center" />
+            </Border>
+        </ControlTemplate>
+
     </Application.Resources>
 </prism:PrismApplication>
