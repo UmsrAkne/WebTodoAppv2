@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ConnectionPage"
     d:DataContext="{d:DesignInstance local:ConnectionPageViewModel}"
+    Background="{StaticResource DarkBgBrush}"
     mc:Ignorable="d">
 
     <Grid Margin="10">
@@ -19,10 +20,13 @@
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Margin" Value="0,1" />
+                    <Setter Property="Foreground" Value="WhiteSmoke" />
                 </Style>
 
                 <Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0,1" />
+                    <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="Background" Value="{StaticResource LightBgBrush}" />
                 </Style>
             </StackPanel.Resources>
             <StackPanel Orientation="Horizontal">
@@ -62,7 +66,10 @@
                     Command="{Binding ConnectionCommand}"
                     Content="接続確認" />
 
-                <TextBlock Width="250" HorizontalAlignment="Right">
+                <TextBlock
+                    Width="250"
+                    HorizontalAlignment="Right"
+                    Foreground="WhiteSmoke">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
