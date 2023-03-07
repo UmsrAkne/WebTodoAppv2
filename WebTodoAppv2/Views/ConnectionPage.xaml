@@ -62,9 +62,9 @@
             <DockPanel>
                 <Button
                     Width="100"
-                    Background="Gray"
                     Command="{Binding ConnectionCommand}"
-                    Content="接続確認" />
+                    Content="接続確認"
+                    Template="{StaticResource ButtonControlTemplate}" />
 
                 <TextBlock
                     Width="250"
@@ -96,10 +96,9 @@
 
             <Button
                 Width="50"
-                Height="25"
-                Background="Gray"
                 Command="{Binding CloseCommand}"
-                Content="決定" />
+                Content="決定"
+                Template="{StaticResource ButtonControlTemplate}" />
         </StackPanel>
 
     </Grid>
